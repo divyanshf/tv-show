@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,8 +23,31 @@ class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieVi
 
     override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
         var currentMovie:Movie = mMovies[position]
+        var tmpRating:Int = currentMovie.movieRating
         holder.titleView.text = currentMovie.movieName
-        holder.ratingView.text = currentMovie.movieRating.toString()
+        holder.ratingView.text = "Rating : $tmpRating / 10"
+        when(currentMovie.option){
+            -1 -> {
+                holder.planButton.isEnabled = true
+                holder.watchingButton.isEnabled = true
+                holder.watchedButton.isEnabled = true
+            }
+            0 -> {
+                holder.planButton.isEnabled = false
+                holder.watchingButton.isEnabled = true
+                holder.watchedButton.isEnabled = true
+            }
+            1 -> {
+                holder.planButton.isEnabled = true
+                holder.watchingButton.isEnabled = false
+                holder.watchedButton.isEnabled = true
+            }
+            2 -> {
+                holder.planButton.isEnabled = true
+                holder.watchingButton.isEnabled = true
+                holder.watchedButton.isEnabled = false
+            }
+        }
     }
 
     fun setMovies(movies : List<Movie>){
@@ -34,5 +58,8 @@ class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieVi
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var titleView:TextView = itemView.findViewById(R.id.title_view)
         var ratingView:TextView = itemView.findViewById(R.id.rating_view)
+        var planButton: Button = itemView.findViewById(R.id.plan_button)
+        var watchingButton: Button = itemView.findViewById(R.id.watching_button)
+        var watchedButton: Button = itemView.findViewById(R.id.watched_button)
     }
 }
