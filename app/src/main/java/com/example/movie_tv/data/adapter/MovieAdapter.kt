@@ -1,4 +1,4 @@
-package com.example.movie_tv
+package com.example.movie_tv.data.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movie_tv.R
+import com.example.movie_tv.data.model.Movie
 
 class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val mInflater : LayoutInflater = LayoutInflater.from(context)
     private var mMovies : List<Movie> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.MovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         var itemView:View = mInflater.inflate(R.layout.movie_item, parent, false)
         return MovieViewHolder(itemView)
     }
@@ -21,8 +23,8 @@ class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieVi
         return mMovies.size
     }
 
-    override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
-        var currentMovie:Movie = mMovies[position]
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        var currentMovie: Movie = mMovies[position]
         var tmpRating:Int = currentMovie.movieRating
         holder.titleView.text = currentMovie.movieName
         holder.ratingView.text = "Rating : $tmpRating / 10"

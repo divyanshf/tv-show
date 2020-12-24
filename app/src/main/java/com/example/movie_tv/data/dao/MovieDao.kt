@@ -1,7 +1,8 @@
-package com.example.movie_tv
+package com.example.movie_tv.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.movie_tv.data.model.Movie
 
 @Dao
 interface MovieDao {

@@ -1,10 +1,7 @@
-package com.example.movie_tv
+package com.example.movie_tv.data.dao
 
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+import com.example.movie_tv.data.model.User
 
 @Dao
 interface UserDao {
@@ -12,8 +9,14 @@ interface UserDao {
     @Insert
     fun insert(user: User)
 
+    @Update
+    fun update(user: User)
+
     @Delete
     fun delete(user: User)
+
+    @Query("DELETE FROM user_table")
+    fun deleteAll()
 
     @Query("SELECT * FROM user_table LIMIT 1")
     fun getUser() : User
