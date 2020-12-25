@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_tv.R
 import com.example.movie_tv.data.model.Movie
 
-class MovieAdapter(context: Context, listener : (item : Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val mInflater : LayoutInflater = LayoutInflater.from(context)
     private var mMovies : List<Movie> = ArrayList()
 
