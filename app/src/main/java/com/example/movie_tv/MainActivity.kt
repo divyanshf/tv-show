@@ -18,7 +18,7 @@ import com.example.movie_tv.data.viewmodel.UserViewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var userViewModel: UserViewModel
-    private lateinit var recyclerView:RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var movieAdapter: MovieAdapter
 
     fun addToWishlist(view: View){

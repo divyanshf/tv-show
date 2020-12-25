@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_tv.R
 import com.example.movie_tv.data.model.Movie
 
-class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(context: Context, listener : (item : Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val mInflater : LayoutInflater = LayoutInflater.from(context)
     private var mMovies : List<Movie> = ArrayList()
 
@@ -26,29 +26,28 @@ class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieVi
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         var currentMovie: Movie = mMovies[position]
         var tmpRating:Int = currentMovie.movieRating
+
         holder.titleView.text = currentMovie.movieName
         holder.ratingView.text = "Rating : $tmpRating / 10"
-        when(currentMovie.option){
-            -1 -> {
-                holder.planButton.isEnabled = true
-                holder.watchingButton.isEnabled = true
-                holder.watchedButton.isEnabled = true
-            }
-            0 -> {
-                holder.planButton.isEnabled = false
-                holder.watchingButton.isEnabled = true
-                holder.watchedButton.isEnabled = true
-            }
-            1 -> {
-                holder.planButton.isEnabled = true
-                holder.watchingButton.isEnabled = false
-                holder.watchedButton.isEnabled = true
-            }
-            2 -> {
-                holder.planButton.isEnabled = true
-                holder.watchingButton.isEnabled = true
-                holder.watchedButton.isEnabled = false
-            }
+
+        holder.planButton.text = if(currentMovie.wishList){
+            "Drop"
+        }else{
+            "Wish"
+        }
+
+        holder.watchingButton.isEnabled = if(currentMovie.watching){
+            holder.watchedButton.isEnabled = true
+            false
+        }else{
+            true
+        }
+
+        holder.watchedButton.isEnabled = if(currentMovie.watched){
+            holder.watchingButton.isEnabled = true
+            false
+        }else{
+            true
         }
     }
 

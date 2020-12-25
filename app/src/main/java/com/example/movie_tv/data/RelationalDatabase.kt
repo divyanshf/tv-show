@@ -11,7 +11,7 @@ import com.example.movie_tv.data.dao.UserDao
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.model.User
 
-@Database(entities = [User::class, Movie::class], version = 2)
+@Database(entities = [User::class, Movie::class], version = 3)
 abstract class RelationalDatabase : RoomDatabase() {
     abstract fun userDao() : UserDao
     abstract fun movieDao() : MovieDao
@@ -52,7 +52,7 @@ abstract class RelationalDatabase : RoomDatabase() {
                 //  Movies
                 mDao.deleteAll()
                 for (i in 0..5) {
-                    var movie: Movie = Movie(i.toString(), "Doctor Strange $i", "https://picsum.photos/200", i * 2, -1)
+                    val movie = Movie("Doctor Strange $i", "https://picsum.photos/200", i * 2, wishList = false, watching = false, watched = false)
                     mDao.insert(movie)
                 }
                 return null
