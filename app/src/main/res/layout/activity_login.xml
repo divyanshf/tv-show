@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:background="#fff">
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:background="#fff"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_margin="30dp"
@@ -23,13 +20,12 @@
             android:layout_height="150dp"
             android:src="@drawable/tv"
             android:layout_marginTop="20dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:fontFamily="@font/taviraj_thin"
             android:text="Welcome Back,"
-            android:textColor="@color/black"
             android:textSize="45sp" />
 
         <TextView
@@ -38,7 +34,6 @@
             android:layout_marginTop="0dp"
             android:fontFamily="@font/taviraj_thin"
             android:text="Login to Continue"
-            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <!--<TextView
@@ -73,35 +68,22 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="Username"
             app:boxCornerRadiusTopEnd="20dp"
-            android:textColorHint="@color/black"
-            app:boxStrokeColor="@color/black"
-
             app:boxCornerRadiusBottomStart="20dp"
-
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:id="@+id/username_edit_text"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"/>
-
-
+                android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="Password"
-            android:textColorHint="@color/black"
-            app:boxStrokeColor="@color/black"
-
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/black"
             app:boxCornerRadiusTopEnd="20dp"
@@ -109,15 +91,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="20dp">
 
-
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/password_edit_text"
-                android:inputType="textPassword"
-                android:textColor="@color/black"/>
-
-
+                android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <!--<Button
@@ -128,18 +106,15 @@
             android:paddingHorizontal="50sp"
             android:paddingVertical="15sp"
             android:text="Login" />-->
-        <Button
-            android:layout_width="200dp"
-
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="Forget Password?"
-            android:textColor="@color/black"
-            android:layout_gravity="right"
-            android:elevation="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="0dp"
-            />
+<!--        <Button-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Forget Password?"-->
+<!--            android:layout_gravity="right"-->
+<!--            android:elevation="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginRight="0dp"-->
+<!--            />-->
 
         <Button
             android:id="@+id/Loginbutton"
@@ -147,32 +122,23 @@
             android:layout_height="wrap_content"
             android:text="Sign In"
             android:layout_gravity="center"
-            android:background="#000000"
             android:onClick="onLogin"
-            android:textColor="@color/white"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"/>
 
-        <Button
-            android:id="@+id/newUser"
-            android:layout_width="200dp"
-
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="New User? Sign Up"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:elevation="10dp"
-
-
-            />
+<!--        <Button-->
+<!--            android:id="@+id/newUser"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="New User? Sign Up"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:elevation="10dp" />-->
 
         <TextView
             android:id="@+id/warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Please enter valid credentials !"
-            android:textColor="@android:color/holo_red_dark"
             android:visibility="invisible"/>
 
     </LinearLayout>
