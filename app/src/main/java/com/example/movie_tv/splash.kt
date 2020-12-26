@@ -11,9 +11,6 @@ import android.widget.ImageView
 import android.widget.TextView
 
 class splash : AppCompatActivity() {
-
-
-
     val splash_time = 4000
     lateinit var topanim : Animation
     lateinit var bottomanim : Animation
