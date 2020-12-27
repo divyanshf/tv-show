@@ -1,5 +1,6 @@
 package com.example.movie_tv.data.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_tv.R
 import com.example.movie_tv.data.model.Movie
 
-class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(context: Context, val listener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val mInflater : LayoutInflater = LayoutInflater.from(context)
     private var mMovies : List<Movie> = ArrayList()
 
@@ -23,10 +24,12 @@ class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieVi
         return mMovies.size
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         var currentMovie: Movie = mMovies[position]
         var tmpRating:Int = currentMovie.movieRating
 
+        //  Handling the UI
         holder.titleView.text = currentMovie.movieName
         holder.ratingView.text = "Rating : $tmpRating / 10"
 
@@ -56,11 +59,29 @@ class MovieAdapter(context: Context) : RecyclerView.Adapter<MovieAdapter.MovieVi
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    //  View Holder along with click listener
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var titleView:TextView = itemView.findViewById(R.id.title_view)
         var ratingView:TextView = itemView.findViewById(R.id.rating_view)
         var planButton: Button = itemView.findViewById(R.id.plan_button)
         var watchingButton: Button = itemView.findViewById(R.id.watching_button)
         var watchedButton: Button = itemView.findViewById(R.id.watched_button)
+
+        init {
+            planButton.setOnClickListener(this)
+            watchingButton.setOnClickListener(this)
+            watchedButton.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position: Int = adapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                listener.onItemClick(position, v)
+            }
+        }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int, view: View?)
     }
 }

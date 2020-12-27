@@ -14,76 +14,80 @@
         android:padding="15dp"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/inner_layout_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background" />
-
         <LinearLayout
-            android:id="@+id/inner_layout_2"
+            android:id="@+id/inner_layout_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:gravity="start"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_background" />
 
-            <TextView
-                android:id="@+id/title_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Movie Name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            <LinearLayout
+                android:id="@+id/inner_layout_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:gravity="start"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/rating_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rating : 5 / 10"
-                android:layout_marginTop="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                <TextView
+                    android:id="@+id/title_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Movie Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <TextView
+                    android:id="@+id/rating_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rating : 5 / 10"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/inner_layout_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/plan_button"
+        <LinearLayout
+            android:id="@+id/inner_layout_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="5dp"
-            android:text="Wishlist"
-            android:textSize="11dp"
-            />
-        <Button
-            android:id="@+id/watching_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:text="Watching"
-            android:textSize="11dp"
-            />
-        <Button
-            android:id="@+id/watched_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:text="Watched"
-            android:textSize="11dp"
-            />
-    </LinearLayout>
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/plan_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:text="Wishlist"
+                android:tag="wish"
+                android:textSize="11dp" />
+
+            <Button
+                android:id="@+id/watching_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Watching"
+                android:tag="watching"
+                android:textSize="11dp" />
+
+            <Button
+                android:id="@+id/watched_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Watched"
+                android:tag="watched"
+                android:textSize="11dp" />
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

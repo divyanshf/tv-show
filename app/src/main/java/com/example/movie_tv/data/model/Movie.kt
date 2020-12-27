@@ -11,9 +11,9 @@ data class Movie(
         @NotNull @ColumnInfo(name = "movie_name") val movieName:String,
         @NotNull @ColumnInfo(name = "url") val movieURL:String,
         @NotNull @ColumnInfo(name = "rating") val movieRating:Int,
-        @NotNull @ColumnInfo(name = "wish_list") val wishList:Boolean,
-        @NotNull @ColumnInfo(name = "watching") val watching:Boolean,
-        @NotNull @ColumnInfo(name = "watched") val watched:Boolean
+        @NotNull @ColumnInfo(name = "wish_list") var wishList:Boolean,
+        @NotNull @ColumnInfo(name = "watching") var watching:Boolean,
+        @NotNull @ColumnInfo(name = "watched") var watched:Boolean
 ){
     constructor(movieName: String, movieURL: String, movieRating: Int, wishList: Boolean, watching: Boolean, watched: Boolean) : this(0, movieName, movieURL, movieRating, wishList, watching, watched)
 }
