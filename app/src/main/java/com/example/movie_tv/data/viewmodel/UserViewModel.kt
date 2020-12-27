@@ -1,13 +1,14 @@
 package com.example.movie_tv.data.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.example.movie_tv.data.UserRepository
 import com.example.movie_tv.data.model.User
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
     private var mUserRepository: UserRepository = UserRepository(application)
-    private var mUser: User = mUserRepository.getUser()
+    private var mUser: User? = mUserRepository.getUser()
 
     fun insert(user: User){
         mUserRepository.insert(user)
@@ -25,7 +26,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         mUserRepository.deleteAll()
     }
 
-    fun getUser(): User {
+    fun getUser(): User? {
+        if(mUser == null){
+            mUser = mUserRepository.getUser()
+            Log.i("NULL USER", "${mUser?.username}")
+        }
         return mUser
     }
 }
