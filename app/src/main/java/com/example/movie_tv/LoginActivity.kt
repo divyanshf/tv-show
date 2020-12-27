@@ -19,17 +19,19 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var warningTextView: TextView
 
     fun onLogin(view: View){
-        var user: User = userViewModel.getUser()
+        var user: User? = userViewModel.getUser()
         var username:String = usernameEditText.text.toString()
         var password:String = passwordEditText.text.toString()
-        if(username == user.username && password == user.password){
-            user.isLogged = true
-            userViewModel.update(user)
+        if(username == user?.username && password == user?.password){
+            user?.isLogged = true
+            userViewModel.update(user!!)
             finish()
         }
         else{
-            Log.i("USERNAME", user.username)
-            Log.i("PASSWORD", user.password)
+            if (user != null) {
+                Log.i("USERNAME", user.username)
+                Log.i("PASSWORD", user.password)
+            }
             warningTextView.visibility = View.VISIBLE
         }
     }
@@ -39,8 +41,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         userViewModel = UserViewModel(application)
-        usernameEditText = findViewById(R.id.username_edit_text) as TextInputEditText
-        passwordEditText = findViewById(R.id.password_edit_text) as TextInputEditText
+        usernameEditText = findViewById<TextInputEditText>(R.id.username_edit_text)
+        passwordEditText = findViewById<TextInputEditText>(R.id.password_edit_text)
         warningTextView = findViewById(R.id.warning)
     }
 }

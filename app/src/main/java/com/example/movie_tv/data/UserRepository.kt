@@ -12,7 +12,7 @@ class UserRepository (application: Application) {
 //    private var mUser: User = mUserDao.getUser();
 
 
-    fun getUser(): User {
+    fun getUser(): User? {
         return GetUserAsyncTask(mUserDao).execute().get()
     }
 

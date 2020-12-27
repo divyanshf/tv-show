@@ -25,18 +25,18 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var movies: List<Movie>
 
-    fun addToWishlist(position: Int){
+    private fun addToWishlist(position: Int){
         var movie: Movie = movies[position]
         movie.wishList = !movie.wishList
         movieViewModel.update(movie)
     }
-    fun addToWatching(position: Int){
+    private fun addToWatching(position: Int){
         var movie: Movie = movies[position]
         movie.watching = true
         movie.watched = false
         movieViewModel.update(movie)
     }
-    fun addToWatched(position: Int){
+    private fun addToWatched(position: Int){
         var movie: Movie = movies[position]
         movie.watching = false
         movie.watched = true
@@ -65,22 +65,24 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         userViewModel = UserViewModel(application)
 
         //  Check if the user is logged in
-        var user:User = userViewModel.getUser()
-        Log.i("ACTIVITY", user.isLogged.toString())
-        if(!user.isLogged){
-            var intent: Intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-        else{
-            //  Recycler view setup
-            recyclerView.adapter = movieAdapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
+        var user:User? = userViewModel.getUser()
+        Log.i("ACTIVITY", user?.isLogged.toString())
+        if(user != null){
+            if(!user?.isLogged){
+                var intent: Intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                //  Recycler view setup
+                recyclerView.adapter = movieAdapter
+                recyclerView.layoutManager = LinearLayoutManager(this)
 
-            //  Movie View Model
-            movieViewModel.getAllMovies().observe(this, Observer {
-                movies = it
-                movieAdapter.setMovies(it)
-            })
+                //  Movie View Model
+                movieViewModel.getAllMovies().observe(this, Observer {
+                    movies = it
+                    movieAdapter.setMovies(it)
+                })
+            }
         }
     }
 
@@ -90,6 +92,7 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         movieViewModel.getAllMovies().observe(this, Observer {
+            movies = it
             movieAdapter.setMovies(it)
         })
     }
