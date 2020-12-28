@@ -43,6 +43,11 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         movieViewModel.update(movie)
     }
 
+    fun addingMovie(view: View)
+    {
+        var intent: Intent = Intent(this, AddMovie::class.java)
+        startActivity(intent)
+    }
     override fun onItemClick(position: Int, view: View?) {
         when(view?.tag){
             "wish" -> addToWishlist(position)

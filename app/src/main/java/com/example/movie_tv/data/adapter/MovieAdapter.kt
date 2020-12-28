@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_tv.R
@@ -31,7 +32,10 @@ class MovieAdapter(context: Context, val listener: OnItemClickListener) : Recycl
 
         //  Handling the UI
         holder.titleView.text = currentMovie.movieName
-        holder.ratingView.text = "Rating : $tmpRating / 10"
+        holder.ratingView.text = "Rating : $tmpRating / 5"
+
+        holder.rateindicator.rating= tmpRating.toFloat()
+
 
         holder.planButton.text = if(currentMovie.wishList){
             "Drop"
@@ -66,6 +70,7 @@ class MovieAdapter(context: Context, val listener: OnItemClickListener) : Recycl
         var planButton: Button = itemView.findViewById(R.id.plan_button)
         var watchingButton: Button = itemView.findViewById(R.id.watching_button)
         var watchedButton: Button = itemView.findViewById(R.id.watched_button)
+        var rateindicator : RatingBar = itemView.findViewById(R.id.indicatorbar)
 
         init {
             planButton.setOnClickListener(this)

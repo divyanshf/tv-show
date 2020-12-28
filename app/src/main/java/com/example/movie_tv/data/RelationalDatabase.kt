@@ -52,7 +52,7 @@ abstract class RelationalDatabase : RoomDatabase() {
                 //  Movies
                 mDao.deleteAll()
                 for (i in 0..5) {
-                    val movie = Movie("Doctor Strange $i", "https://picsum.photos/200", i * 2, wishList = false, watching = false, watched = false)
+                    val movie = Movie("Doctor Strange $i", "https://picsum.photos/200", i , wishList = false, watching = false, watched = false)
                     mDao.insert(movie)
                 }
                 return null
