@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "856696466033",
+    "project_id": "tvshow-adad2",
+    "storage_bucket": "tvshow-adad2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856696466033:android:c2f27427d11d1862d309d0",
+        "android_client_info": {
+          "package_name": "com.example.movie_tv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856696466033-vjj6eb5i4f9eqn1rb9vhu87g06na7vp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJewlAlZv5DSb0kdTYwhPaS-uRGg7-whU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856696466033-vjj6eb5i4f9eqn1rb9vhu87g06na7vp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

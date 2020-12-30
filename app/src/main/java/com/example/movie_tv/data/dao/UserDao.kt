@@ -7,23 +7,17 @@ import com.example.movie_tv.data.model.User
 interface UserDao {
 
     @Insert
-    fun insert(user: User)
+    suspend fun insert(user: User)
 
     @Update
-    fun update(user: User)
+    suspend fun update(user: User)
 
     @Delete
-    fun delete(user: User)
+    suspend fun delete(user: User)
 
     @Query("DELETE FROM user_table")
-    fun deleteAll()
+    suspend fun deleteAll()
 
     @Query("SELECT * FROM user_table LIMIT 1")
-    fun getUser() : User
-
-//    @Query("DELETE FROM user_table")
-//    fun deleteAll()
-
-//    @Query("SELECT * FROM user_table ORDER BY word ASC")
-//    fun getAllWords() : LiveData<List<User>>
+    suspend fun getUser() : User
 }
