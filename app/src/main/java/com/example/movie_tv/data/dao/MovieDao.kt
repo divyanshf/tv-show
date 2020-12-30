@@ -8,16 +8,16 @@ import com.example.movie_tv.data.model.Movie
 interface MovieDao {
 
     @Insert
-    fun insert(movie: Movie)
+    suspend fun insert(movie: Movie)
 
     @Update
-    fun update(movie: Movie)
+    suspend fun update(movie: Movie)
 
     @Delete
-    fun delete(movie: Movie)
+    suspend fun delete(movie: Movie)
 
     @Query("DELETE FROM movie_table")
-    fun deleteAll()
+    suspend fun deleteAll()
 
     @Query("SELECT * FROM movie_table ORDER BY movie_name ASC")
     fun getAllMovies() : LiveData<List<Movie>>
