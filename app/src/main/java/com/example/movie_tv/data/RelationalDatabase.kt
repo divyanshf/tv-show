@@ -1,6 +1,7 @@
 package com.example.movie_tv.data
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room
@@ -18,8 +19,10 @@ abstract class RelationalDatabase : RoomDatabase() {
 
     companion object{
         private var INSTANCE: RelationalDatabase? = null
+        private lateinit var sharedPreferences:SharedPreferences
 
         fun getDatabase(context: Context) : RelationalDatabase {
+            sharedPreferences = context.getSharedPreferences("com.example.movie_tv.data", 0)
             if(INSTANCE == null){
                 synchronized(RelationalDatabase::class){
                     if(INSTANCE == null){
@@ -33,7 +36,7 @@ abstract class RelationalDatabase : RoomDatabase() {
             return INSTANCE!!
         }
 
-        private var callback:RoomDatabase.Callback = object:RoomDatabase.Callback(){
+        private var callback: Callback = object: Callback(){
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
                 PopulateDbAsync(INSTANCE!!).execute()
@@ -45,15 +48,19 @@ abstract class RelationalDatabase : RoomDatabase() {
             private var uDao: UserDao = db.userDao()
 
             override fun doInBackground(vararg params: Void?): Void? {
-                //  User
-                uDao.deleteAll()
-                uDao.insert(User("test", "password", false))
+                if(sharedPreferences.getBoolean("POPULATED", false)){
+                    //  User
+                    uDao.deleteAll()
+                    uDao.insert(User("test", "password", false))
 
-                //  Movies
-                mDao.deleteAll()
-                for (i in 0..5) {
-                    val movie = Movie("Doctor Strange $i", "https://picsum.photos/200", i , wishList = false, watching = false, watched = false)
-                    mDao.insert(movie)
+                    //  Movies
+                    mDao.deleteAll()
+                    for (i in 0..5) {
+                        val movie = Movie("Doctor Strange $i", "https://picsum.photos/200", i , wishList = false, watching = false, watched = false)
+                        mDao.insert(movie)
+                    }
+
+                    sharedPreferences.edit().putBoolean("POPULATED", true)
                 }
                 return null
             }
