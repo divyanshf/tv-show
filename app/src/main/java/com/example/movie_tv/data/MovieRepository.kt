@@ -22,58 +22,23 @@ class MovieRepository (application: Application) {
         CoroutineScope(IO).launch {
             mMovieDao.insert(movie)
         }
-//        InsertAsyncTask(mMovieDao).execute(movie)
     }
 
     fun update(movie: Movie){
         CoroutineScope(IO).launch {
             mMovieDao.update(movie)
         }
-//        UpdateAsyncTask(mMovieDao).execute(movie)
     }
 
     fun delete(movie: Movie){
         CoroutineScope(IO).launch {
             mMovieDao.delete(movie)
         }
-//        DeleteAsyncTask(mMovieDao).execute(movie)
     }
 
     fun deleteAll(){
         CoroutineScope(IO).launch {
             mMovieDao.deleteAll()
         }
-//        DeleteAllAsyncTask(mMovieDao).execute()
     }
-
-//    companion object{
-//        private class InsertAsyncTask(dao: MovieDao) : AsyncTask<Movie, Void, Void>(){
-//            private var tmpDao: MovieDao = dao
-//            override fun doInBackground(vararg params: Movie?): Void? {
-//                tmpDao.insert(params[0]!!)
-//                return null
-//            }
-//        }
-//        private class UpdateAsyncTask(dao: MovieDao) : AsyncTask<Movie, Void, Void>(){
-//            private var tmpDao: MovieDao = dao
-//            override fun doInBackground(vararg params: Movie?): Void? {
-//                tmpDao.update(params[0]!!)
-//                return null
-//            }
-//        }
-//        private class DeleteAsyncTask(dao: MovieDao) : AsyncTask<Movie, Void, Void>(){
-//            private var tmpDao: MovieDao = dao
-//            override fun doInBackground(vararg params: Movie?): Void? {
-//                tmpDao.delete(params[0]!!)
-//                return null
-//            }
-//        }
-//        private class DeleteAllAsyncTask(dao: MovieDao) : AsyncTask<Void, Void, Void>(){
-//            private var tmpDao: MovieDao = dao
-//            override fun doInBackground(vararg params: Void?): Void? {
-//                tmpDao.deleteAll()
-//                return null
-//            }
-//        }
-//    }
 }

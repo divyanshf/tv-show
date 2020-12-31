@@ -15,21 +15,23 @@ import com.google.android.material.textfield.TextInputEditText
 
 class AddMovie : AppCompatActivity() {
     private lateinit var movieViewModel: MovieViewModel
-    private lateinit var mname : TextInputEditText
-    private lateinit var url : TextInputEditText
-    private lateinit var ratingBar: RatingBar
+    private lateinit var mnameView : TextInputEditText
+    private lateinit var urlView : TextInputEditText
+    private lateinit var yearView : TextInputEditText
+    private lateinit var ratingBar : RatingBar
     private var ratval: Int =0
 
 
     fun add(view: View)
     {
-        val moviename =  mname.text.toString()
-        val urlname= url.text.toString()
+        val movieName =  mnameView.text.toString()
+        val urlName = urlView.text.toString()
+//        val yearName = ("" + yearView.text) as Int
 
-        if(inputCheck(moviename,urlname))
+        if(inputCheck(movieName, urlName))
         {
             //Create user object
-            val movie = Movie(0,moviename,urlname,ratval,false,false,false)
+            val movie = Movie(movieName , 2020, urlName, ratval,false,false,false)
             //Add data to database
             movieViewModel.insert(movie)
             Toast.makeText(this, "Successfully Added!", Toast.LENGTH_LONG).show()
@@ -46,19 +48,18 @@ class AddMovie : AppCompatActivity() {
     }
 
 
-    private fun inputCheck(moviename:String , url : String ):Boolean{
-        return !(TextUtils.isEmpty(moviename) && TextUtils.isEmpty(url) )
-
-
-
+    private fun inputCheck(moviename:String , url : String):Boolean{
+        return !(TextUtils.isEmpty(moviename) && TextUtils.isEmpty(url))
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_movie)
 
-        mname= findViewById(R.id.mname_edt) as TextInputEditText
-        url = findViewById(R.id.url_edt) as TextInputEditText
-        ratingBar =findViewById(R.id.ratingBar) as RatingBar
+        mnameView = findViewById<TextInputEditText>(R.id.mname_edt)
+        urlView = findViewById<TextInputEditText>(R.id.url_edt)
+        yearView = findViewById<TextInputEditText>(R.id.year_edt)
+        ratingBar = findViewById<RatingBar>(R.id.ratingBar)
         var txt : String
         ratingBar.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { _, rating, _ ->
@@ -74,18 +75,11 @@ class AddMovie : AppCompatActivity() {
                 else
                     txt="Excellent "
 
-
-
                 Toast.makeText(this, txt+"Movie", Toast.LENGTH_SHORT).show()
-
                 ratval=rating.toInt()
-
             }
 
-
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
-
-
 
     }
 

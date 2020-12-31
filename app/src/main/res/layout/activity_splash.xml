@@ -4,33 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".splash">
 
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="245dp"
         android:layout_height="237dp"
-
-
         android:layout_marginTop="120dp"
         app:layout_constraintBottom_toTopOf="@+id/logoText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
         app:srcCompat="@drawable/tv" />
-
 
     <TextView
         android:id="@+id/logoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/calligraffitti"
         android:text="TV Show Watch Tracker"
         android:textAlignment="center"
         android:textColor="#5c0403"
-        android:textSize="65sp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

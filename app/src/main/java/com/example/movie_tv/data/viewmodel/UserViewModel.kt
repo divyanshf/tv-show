@@ -27,7 +27,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getUser(): User? {
-        if(mUser == null){
+        while(mUser == null){
             mUser = mUserRepository.getUser()
             Log.i("NULL USER", "${mUser?.username}")
         }

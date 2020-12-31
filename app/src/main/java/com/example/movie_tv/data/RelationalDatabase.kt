@@ -3,6 +3,7 @@ package com.example.movie_tv.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.AsyncTask
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -15,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-@Database(entities = [User::class, Movie::class], version = 3)
+@Database(entities = [User::class, Movie::class], version = 4)
 abstract class RelationalDatabase : RoomDatabase() {
     abstract fun userDao() : UserDao
     abstract fun movieDao() : MovieDao
@@ -42,53 +43,31 @@ abstract class RelationalDatabase : RoomDatabase() {
         private var callback: Callback = object: Callback(){
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
-                CoroutineScope(IO).launch {
-                    populateDB(INSTANCE!!)
+                val isPopulated = sharedPreferences.getBoolean("POPULATED", false)
+                if(!isPopulated){
+                    CoroutineScope(IO).launch {
+                        populateDB(INSTANCE!!)
+                    }
                 }
-//                PopulateDbAsync(INSTANCE!!).execute()
             }
         }
 
         private suspend fun populateDB(db: RelationalDatabase){
             val uDao = db.userDao()
             val mDao = db.movieDao()
-            if(sharedPreferences.getBoolean("POPULATED", false)){
-                //  User
-                uDao.deleteAll()
-                uDao.insert(User("test", "password", false))
 
-                //  Movies
-                mDao.deleteAll()
-                for (i in 0..5) {
-                    val movie = Movie("Doctor Strange $i", "https://picsum.photos/200", i , wishList = false, watching = false, watched = false)
-                    mDao.insert(movie)
-                }
+            //  User
+            Log.i("POPULATE", "POPULATING")
+            uDao.deleteAll()
+            uDao.insert(User("test", "password", false))
 
-                sharedPreferences.edit().putBoolean("POPULATED", true)
+            //  Movies
+            mDao.deleteAll()
+            for (i in 0..5) {
+                val movie = Movie("Doctor Strange $i", i + 2015, "https://picsum.photos/200", i , wishList = false, watching = false, watched = false)
+                mDao.insert(movie)
             }
+            sharedPreferences.edit().putBoolean("POPULATED", true).apply()
         }
-
-//        private class PopulateDbAsync(db: RelationalDatabase) : AsyncTask<Void, Void, Void>(){
-//            private var mDao: MovieDao = db.movieDao()
-//            private var uDao: UserDao = db.userDao()
-//
-//            override fun doInBackground(vararg params: Void?): Void? {
-//                if(sharedPreferences.getBoolean("POPULATED", false)){
-//                    //  User
-//                    uDao.deleteAll()
-//                    uDao.insert(User("test", "password", false))
-//
-//                    //  Movies
-//                    mDao.deleteAll()
-//                    for (i in 0..5) {
-//                        val movie = Movie("Doctor Strange $i", "https://picsum.photos/200", i , wishList = false, watching = false, watched = false)
-//                        mDao.insert(movie)
-//                    }
-//
-//                    sharedPreferences.edit().putBoolean("POPULATED", true)
-//                }
-//                return null
-//            }
-//        }
     }
 }

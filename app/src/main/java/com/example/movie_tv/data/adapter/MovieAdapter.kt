@@ -32,10 +32,8 @@ class MovieAdapter(context: Context, val listener: OnItemClickListener) : Recycl
 
         //  Handling the UI
         holder.titleView.text = currentMovie.movieName
-        holder.ratingView.text = "Rating : $tmpRating / 5"
-
+        holder.yearView.text = "Released : ${currentMovie.movieYear}"
         holder.rateindicator.rating= tmpRating.toFloat()
-
 
         holder.planButton.text = if(currentMovie.wishList){
             "Drop"
@@ -66,7 +64,7 @@ class MovieAdapter(context: Context, val listener: OnItemClickListener) : Recycl
     //  View Holder along with click listener
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var titleView:TextView = itemView.findViewById(R.id.title_view)
-        var ratingView:TextView = itemView.findViewById(R.id.rating_view)
+        var yearView:TextView = itemView.findViewById(R.id.year_view)
         var planButton: Button = itemView.findViewById(R.id.plan_button)
         var watchingButton: Button = itemView.findViewById(R.id.watching_button)
         var watchedButton: Button = itemView.findViewById(R.id.watched_button)

@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         var intent: Intent = Intent(this, AddMovie::class.java)
         startActivity(intent)
     }
+
     override fun onItemClick(position: Int, view: View?) {
         when(view?.tag){
             "wish" -> addToWishlist(position)
@@ -71,7 +72,6 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
 
         //  Check if the user is logged in
         var user:User? = userViewModel.getUser()
-        Log.i("ACTIVITY", user?.isLogged.toString())
         if(user != null){
             if(!user?.isLogged){
                 var intent: Intent = Intent(this, LoginActivity::class.java)
