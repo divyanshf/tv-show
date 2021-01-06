@@ -9,7 +9,9 @@
         android:roundIcon="@drawable/tv"
         android:supportsRtl="true"
         android:theme="@style/Theme.MOVIETV">
-        <activity android:name=".AddMovie"></activity>
+        <activity android:name=".movieTabs"></activity>
+        <activity android:name=".my_list" />
+        <activity android:name=".AddMovie" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".splash">

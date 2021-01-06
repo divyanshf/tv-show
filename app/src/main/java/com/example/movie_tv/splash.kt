@@ -31,7 +31,7 @@ class splash : AppCompatActivity() {
         imageView.animation = topanim
         text.animation = bottomanim
 
-        val intent = Intent(this@splash,MainActivity::class.java)
+        val intent = Intent(this@splash,my_list::class.java)
         Handler().postDelayed( {
 
 

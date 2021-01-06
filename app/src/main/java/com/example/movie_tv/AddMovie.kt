@@ -26,12 +26,13 @@ class AddMovie : AppCompatActivity() {
     {
         val movieName =  mnameView.text.toString()
         val urlName = urlView.text.toString()
+        val yearval = yearView.text.toString()
 //        val yearName = ("" + yearView.text) as Int
 
         if(inputCheck(movieName, urlName))
         {
             //Create user object
-            val movie = Movie(movieName , 2020, urlName, ratval,false,false,false)
+            val movie = Movie(movieName , yearval.toInt(), urlName, ratval,false,false,false)
             //Add data to database
             movieViewModel.insert(movie)
             Toast.makeText(this, "Successfully Added!", Toast.LENGTH_LONG).show()

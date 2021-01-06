@@ -4,4 +4,9 @@
         <item name="colorControlNormal">@color/grey</item>
         <item name="colorControlActivated">@color/gold</item>
     </style>
+
+    <style name="CustomTabStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">5dp</item>
+
+    </style>
 </resources>

@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="40dp"
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/taviraj_thin"
             android:background="@color/white"
             android:text="MOVIE"
@@ -106,9 +106,8 @@
             android:clickable="true"
             android:focusable="true"
             android:onClick="add"
-            app:srcCompat="@android:drawable/stat_sys_upload"
-            tools:layout_editor_absoluteX="177dp"
-            tools:layout_editor_absoluteY="451dp" />
+            app:srcCompat="@drawable/ic_baseline_upgrade_24"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 

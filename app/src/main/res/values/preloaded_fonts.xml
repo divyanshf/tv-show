@@ -2,6 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/calligraffitti</item>
+        <item>@font/cutive</item>
+        <item>@font/fjord_one</item>
         <item>@font/taviraj_thin</item>
     </array>
 </resources>

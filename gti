@@ -1,0 +1,201 @@
+[33mcommit 6c6d8e222fc4332a8eebcd9857fbdc4094dd6b45[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/d_branch[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: b19620f 9a3a3c9
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Thu Dec 31 14:24:46 2020 +0530
+
+    Merge pull request #11 from DivyanshFalodiya/d_branch
+    
+    fixed the database bug #2
+
+[33mcommit 9a3a3c9dac0aa9c51b43d9f78bfa0edd635fb73b[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Thu Dec 31 14:24:05 2020 +0530
+
+    fixed the database bug #2
+
+[33mcommit b19620f0ea83047fd7c0fc540795b54d60377ef9[m
+Merge: 24143b8 5aa1a56
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Wed Dec 30 13:27:53 2020 +0530
+
+    Merge pull request #10 from DivyanshFalodiya/d_branch
+    
+    added basic coroutines
+
+[33mcommit 5aa1a56b0803322c78ef2f9769dc06907cf0e479[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Wed Dec 30 13:25:29 2020 +0530
+
+    added basic coroutines
+
+[33mcommit 24143b80ace2975ac3f2a5af63f4014e70195dcd[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Wed Dec 30 11:35:54 2020 +0530
+
+    repopulating bug fixed
+
+[33mcommit 98a8cab899586e412e48da6549e2034b909cba64[m
+Merge: 8384c00 8bd1f68
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Mon Dec 28 15:41:14 2020 +0530
+
+    Merge pull request #9 from DivyanshFalodiya/p_branch
+    
+    Adding New Movie
+
+[33mcommit 8384c00f83bd86415022a5a8d723ffe07775eea1[m
+Author: Prateek Singh <prateeksingh09apr@gmail.com>
+Date:   Mon Dec 28 13:19:21 2020 +0530
+
+    Adding new movie
+
+[33mcommit 8bd1f68833e2c83f0767be14f31b3436bc2bf9ed[m[33m ([m[1;31morigin/p_branch[m[33m)[m
+Author: Prateek Singh <prateeksingh09apr@gmail.com>
+Date:   Mon Dec 28 02:10:14 2020 +0530
+
+    Adding New Movie
+
+[33mcommit 869fc68039ad8f41d20e69508ebdac0a16335af4[m
+Merge: 29fc921 5d9a26a
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Sun Dec 27 23:09:08 2020 +0530
+
+    Merge pull request #8 from DivyanshFalodiya/d_branch
+    
+    fixed null safety bug
+
+[33mcommit 5d9a26a610d13e1d63121fc700a5ad0eddea7648[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Sun Dec 27 23:08:00 2020 +0530
+
+    fixed null safety bug
+
+[33mcommit 29fc9216958ae74f53560e97f54509e475236fec[m
+Merge: f8ab17b 41557ab
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Sun Dec 27 12:50:17 2020 +0530
+
+    Merge pull request #7 from DivyanshFalodiya/d_branch
+    
+    button functionality added
+
+[33mcommit 41557ab5dc83f80782eab1fcae2c2179860ebfad[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Sun Dec 27 12:48:51 2020 +0530
+
+    button functionality added
+
+[33mcommit f8ab17b2afb24d1df07cbec31a87eab9f374461f[m
+Merge: f8a9ff5 51ee848
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Sat Dec 26 15:08:21 2020 +0530
+
+    Merge pull request #6 from DivyanshFalodiya/p_branch
+    
+    dark mode compatibility
+
+[33mcommit 51ee848f936c95f159a449e0b31001dc97f69e71[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Sat Dec 26 15:04:09 2020 +0530
+
+    dark ui compatibility
+
+[33mcommit f8a9ff55aaae1c1a7220280ff8380dfa7358bc36[m
+Merge: 69338f9 dd159cb
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Sat Dec 26 15:02:33 2020 +0530
+
+    Merge pull request #5 from DivyanshFalodiya/p_branch
+    
+    Added Interface
+
+[33mcommit 2e0d17bc609428e419396798b8a2a07ea3c81a0e[m
+Merge: e2e5114 dd159cb
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Sat Dec 26 14:48:57 2020 +0530
+
+    Merge branch 'p_branch' of https://github.com/DivyanshFalodiya/tv-show into p_branch
+
+[33mcommit dd159cb926163c2e044d099eea5fa52520b9af76[m
+Author: Prateek Singh <prateeksingh09apr@gmail.com>
+Date:   Sat Dec 26 14:19:12 2020 +0530
+
+    Added Interface
+
+[33mcommit 69338f9588fd30d0b42e74960fa85735b066f0a2[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Fri Dec 25 20:19:49 2020 +0530
+
+    minor bug corrected
+
+[33mcommit 2f58caafed6b7f619a6b4c611c58b5e38b42e3ce[m
+Merge: 9580251 e2e5114
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Fri Dec 25 20:18:13 2020 +0530
+
+    Merge pull request #4 from DivyanshFalodiya/d_branch
+    
+    subtle changes
+
+[33mcommit e2e5114c80eb76553f9b0a3e1956f71fb6ff84a3[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Fri Dec 25 20:16:42 2020 +0530
+
+    subtle changes
+
+[33mcommit 95802510b2d3b9c06733d4d1c93d98097d8b9077[m
+Merge: 5f72ab7 2db107a
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Thu Dec 24 10:45:23 2020 +0530
+
+    Merge pull request #3 from DivyanshFalodiya/d_branch
+    
+    added the login activity
+
+[33mcommit 2db107af21062fb745acdf5dc3f1684a759379b1[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Thu Dec 24 10:43:29 2020 +0530
+
+    added the login activity
+
+[33mcommit 5f72ab742a61cf2a45b837e5f221652f44b822b1[m
+Merge: 138ebac d5a8dc3
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Thu Dec 24 01:35:26 2020 +0530
+
+    Merge pull request #2 from DivyanshFalodiya/d_branch
+    
+    added the ui
+
+[33mcommit d5a8dc37308e71b0278b431725f49d52923f9519[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Thu Dec 24 01:34:23 2020 +0530
+
+    added the ui
+
+[33mcommit 138ebac47aa7ddea48db7d50178b27c564e3ff7b[m
+Merge: 4eca5a0 3d267dd
+Author: n00B <33622561+DivyanshFalodiya@users.noreply.github.com>
+Date:   Wed Dec 23 20:28:00 2020 +0530
+
+    Merge pull request #1 from DivyanshFalodiya/d_branch
+    
+    merge_d_branch#1
+
+[33mcommit 3d267dd4c411f7e772c5fedc0d46a0161830ab3d[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Wed Dec 23 20:26:17 2020 +0530
+
+    added db
+
+[33mcommit c3d67bb2ac818a1de61a65cf5500679eafac7035[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Wed Dec 23 20:22:29 2020 +0530
+
+    added db
+
+[33mcommit 4eca5a04bb77f4cc50ddc784b47c3bab108893f8[m
+Author: Divyansh Falodiya <divyanshfalodiyaab@gmai.com>
+Date:   Sun Dec 20 23:03:04 2020 +0530
+
+    initialized repo
