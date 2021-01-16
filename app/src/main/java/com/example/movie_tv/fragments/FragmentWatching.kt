@@ -1,4 +1,4 @@
-package com.example.movie_tv.Fragments
+package com.example.movie_tv.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +15,7 @@ import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.viewmodel.MovieViewModel
 
 
-class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
+class FragmentWatching : Fragment(), MovieAdapter.OnItemClickListener  {
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieAdapter: MovieAdapter
@@ -30,16 +30,16 @@ class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_watched, container, false)
+        val view = inflater.inflate(R.layout.fragment_watching, container, false)
 
-        recyclerView = view.findViewById(R.id.recycler_view_watched)
+        recyclerView = view.findViewById(R.id.recycler_view_watching)
         movieAdapter = MovieAdapter(requireContext(), this)
         movieViewModel = MovieViewModel(activity?.application!!)
 
         recyclerView.adapter = movieAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        movieViewModel.getWatchedMovies().observe(viewLifecycleOwner, Observer {
+        movieViewModel.getWatchingMovies().observe(viewLifecycleOwner, Observer {
             movies = it
             movieAdapter.setMovies(movies)
         })
@@ -50,7 +50,7 @@ class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
     override fun onItemClick(position: Int, view: View?) {
         when(view?.tag){
             "wish" -> addToWishlist(position)
-            "watching" -> addToWatching(position)
+            "watched" -> addToWatched(position)
             else -> {
                 Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
             }
@@ -63,10 +63,10 @@ class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
         movieViewModel.update(movie)
     }
 
-    private fun addToWatching(position: Int){
+    private fun addToWatched(position: Int){
         var movie: Movie = movies[position]
-        movie.watching = true
-        movie.watched = false
+        movie.watching = false
+        movie.watched = true
         movieViewModel.update(movie)
     }
 }
