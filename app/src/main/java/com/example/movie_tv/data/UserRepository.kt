@@ -11,10 +11,7 @@ class UserRepository (application: Application) {
     private var mUserDao: UserDao = db.userDao()
 
     fun getUser(): User? {
-        var user:User? = null
-//        CoroutineScope(Dispatchers.IO).async {
-//            user = getSuspendUser()
-//        }.onAwait
+        var user: User?
         runBlocking {
             user = getSuspendUser()
         }

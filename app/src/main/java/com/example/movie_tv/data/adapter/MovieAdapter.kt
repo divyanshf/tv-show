@@ -2,17 +2,27 @@ package com.example.movie_tv.data.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.renderscript.ScriptGroup
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_tv.R
 import com.example.movie_tv.data.model.Movie
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import java.io.InputStream
+import java.lang.Exception
+import java.net.URL
 
-class MovieAdapter(context: Context, val listener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(val context: Context, val listener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val mInflater : LayoutInflater = LayoutInflater.from(context)
     private var mMovies : List<Movie> = ArrayList()
 
@@ -25,6 +35,25 @@ class MovieAdapter(context: Context, val listener: OnItemClickListener) : Recycl
         return mMovies.size
     }
 
+    private suspend fun loadImage(url:String, imageView: ImageView){
+        var drawable:Drawable? = context.getDrawable(R.drawable.ic_launcher_background)
+
+        try {
+            var inputStream:InputStream = URL(url).content as InputStream
+            drawable = Drawable.createFromStream(inputStream, "src")
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+
+        withContext(Main){
+            try {
+                imageView.setImageDrawable(drawable)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+    }
+
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         var currentMovie: Movie = mMovies[position]
@@ -34,6 +63,10 @@ class MovieAdapter(context: Context, val listener: OnItemClickListener) : Recycl
         holder.titleView.text = currentMovie.movieName
         holder.yearView.text = "Released : ${currentMovie.movieYear}"
         holder.rateindicator.rating= tmpRating.toFloat()
+
+        CoroutineScope(IO).launch {
+            loadImage(currentMovie.movieURL, holder.imageView)
+        }
 
         holder.planButton.text = if(currentMovie.wishList){
             "Drop"
@@ -65,6 +98,7 @@ class MovieAdapter(context: Context, val listener: OnItemClickListener) : Recycl
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var titleView:TextView = itemView.findViewById(R.id.title_view)
         var yearView:TextView = itemView.findViewById(R.id.year_view)
+        var imageView:ImageView = itemView.findViewById(R.id.image_view)
         var planButton: Button = itemView.findViewById(R.id.plan_button)
         var watchingButton: Button = itemView.findViewById(R.id.watching_button)
         var watchedButton: Button = itemView.findViewById(R.id.watched_button)
