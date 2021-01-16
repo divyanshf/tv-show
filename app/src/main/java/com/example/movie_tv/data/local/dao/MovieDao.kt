@@ -6,7 +6,6 @@ import com.example.movie_tv.data.model.Movie
 
 @Dao
 interface MovieDao {
-
     @Insert
     suspend fun insert(movie: Movie)
 
@@ -21,4 +20,13 @@ interface MovieDao {
 
     @Query("SELECT * FROM movie_table ORDER BY movie_name ASC")
     fun getAllMovies() : LiveData<List<Movie>>
+
+    @Query("SELECT * FROM movie_table WHERE wish_list = 1 ORDER BY movie_name ASC")
+    fun getWishMovies() : LiveData<List<Movie>>
+
+    @Query("SELECT * FROM movie_table WHERE watching = 1 ORDER BY movie_name ASC")
+    fun getWatchingMovies() : LiveData<List<Movie>>
+
+    @Query("SELECT * FROM movie_table WHERE watched = 1 ORDER BY movie_name ASC")
+    fun getWatchedMovies() : LiveData<List<Movie>>
 }

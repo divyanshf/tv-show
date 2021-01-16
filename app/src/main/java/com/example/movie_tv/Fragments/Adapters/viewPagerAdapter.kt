@@ -27,7 +27,6 @@ class viewPagerAdapter(supportFragmentManager: FragmentManager): FragmentPagerAd
     {
         mFragmentList.add(fragment)
         mFragmentTitleList.add(title)
-
     }
 
 

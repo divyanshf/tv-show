@@ -64,7 +64,12 @@ abstract class RelationalDatabase : RoomDatabase() {
             //  Movies
             mDao.deleteAll()
             for (i in 0..5) {
-                val movie = Movie("Doctor Strange $i", i + 2015, "https://picsum.photos/200", i , wishList = false, watching = false, watched = false)
+                val movie = Movie("Doctor Strange $i", i + 2015, "https://picsum.photos/200", i , wishList = true, watching = false, watched = false)
+                if(i % 2 == 0){
+                    movie.watching = true
+                }else{
+                    movie.watched = true
+                }
                 mDao.insert(movie)
             }
             sharedPreferences.edit().putBoolean("POPULATED", true).apply()

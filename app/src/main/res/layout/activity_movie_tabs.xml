@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".movieTabs">
+    android:background="@color/white"
+    tools:context=".MovieTabs">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:background="@color/light_grey">
 
         <TextView
             android:layout_width="match_parent"
@@ -18,26 +20,28 @@
             android:fontFamily="@font/fjord_one"
             android:padding="6dp"
             android:text="   My Movies"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             android:textSize="25dp" />
-
-
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/design_default_color_primary"
-            app:tabIndicatorColor="@color/white"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white"
-            app:tabIconTint="@color/white"/>
+            android:background="@color/light_grey"
+            app:tabIconTint="@color/grey"
+            app:tabIndicatorColor="@color/green"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="5dp"
+            app:tabSelectedTextColor="@color/green"
+            app:tabTextColor="@color/grey" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp"
+        app:layout_anchor="@+id/viewPager"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
