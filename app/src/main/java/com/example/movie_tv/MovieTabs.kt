@@ -13,9 +13,11 @@ import com.example.movie_tv.data.model.User
 import com.example.movie_tv.data.viewmodel.UserViewModel
 import com.example.movie_tv.fragments.FragmentsAdd
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
 
 class MovieTabs : AppCompatActivity(){
     private lateinit var userViewModel: UserViewModel
+    private lateinit var mAuth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +25,11 @@ class MovieTabs : AppCompatActivity(){
 
 //      Initialize late init
         userViewModel = UserViewModel(application)
+        mAuth = FirebaseAuth.getInstance()
 
         //  Check if the user is logged
-        var user: User? = userViewModel.getUser()
-        if(!user?.isLogged!!){
+        var user = mAuth.currentUser
+        if(user == null){
             var intent: Intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
         }

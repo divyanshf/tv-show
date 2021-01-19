@@ -1,33 +1,49 @@
 package com.example.movie_tv.auth
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.movie_tv.R
+import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.model.User
 import com.example.movie_tv.data.viewmodel.MovieViewModel
 import com.example.movie_tv.data.viewmodel.UserViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 
 class FragmentLogin : Fragment() {
     private lateinit var userViewModel: UserViewModel
+    private lateinit var movieViewModel: MovieViewModel
     private lateinit var usernameEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var warningTextView: TextView
+    private lateinit var mAuth:FirebaseAuth
 
     private fun loginUser(){
-        var username = usernameEditText.text as String
-        var password = passwordEditText.text as String
-        var user:User? = userViewModel.getUser()
+        var username:String = usernameEditText.text.toString()
+        var password:String = passwordEditText.text.toString()
 
-        if(user != null){
-            user.isLogged = true
-        }
+        mAuth.signInWithEmailAndPassword(username, password)
+            .addOnCompleteListener(OnCompleteListener<AuthResult>(){
+                if(it.isSuccessful){
+                    //  Fetch the movies
+
+                    //  Finish the activity
+                    activity?.finish()
+                }else{
+                    warningTextView.visibility = View.VISIBLE
+                }
+            })
     }
 
     override fun onCreateView(
@@ -38,9 +54,11 @@ class FragmentLogin : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
         usernameEditText = view.findViewById(R.id.username_edit_text)
         passwordEditText = view.findViewById(R.id.password_edit_text)
         warningTextView = view.findViewById(R.id.warning)
+        mAuth = FirebaseAuth.getInstance()
 
         view.findViewById<Button>(R.id.button_login).setOnClickListener {
             loginUser()
