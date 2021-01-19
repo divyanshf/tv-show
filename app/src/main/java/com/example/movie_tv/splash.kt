@@ -13,7 +13,7 @@ import com.example.movie_tv.data.model.User
 import com.example.movie_tv.data.viewmodel.UserViewModel
 
 class splash : AppCompatActivity() {
-    val splash_time = 4000
+    val splash_time = 3000
     lateinit var topanim : Animation
     lateinit var bottomanim : Animation
     lateinit var imageView: ImageView
