@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentAuth">
+
+    <fragment
+        android:id="@+id/fragmentAuth"
+        android:name="com.example.movie_tv.auth.FragmentAuth"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_fragmentAuth_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentAuth_to_fragmentRegister"
+            app:destination="@id/fragmentRegister" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.example.movie_tv.auth.FragmentLogin"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/fragmentRegister"
+        android:name="com.example.movie_tv.auth.FragmentRegister"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+</navigation>

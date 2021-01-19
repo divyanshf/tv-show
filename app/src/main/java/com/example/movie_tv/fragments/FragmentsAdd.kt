@@ -1,6 +1,5 @@
 package com.example.movie_tv.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -10,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.movie_tv.MainActivity
 import com.example.movie_tv.R
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.viewmodel.MovieViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
-import java.time.Year
 
 class FragmentsAdd : Fragment() {
     private lateinit var movieViewModel: MovieViewModel
