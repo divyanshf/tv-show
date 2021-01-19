@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
+import com.example.movie_tv.auth.AuthActivity
 import com.example.movie_tv.fragments.adapters.viewPagerAdapter
 import com.example.movie_tv.fragments.FragmentWish
 import com.example.movie_tv.fragments.FragmentWatching
@@ -26,7 +27,7 @@ class MovieTabs : AppCompatActivity(){
         //  Check if the user is logged
         var user: User? = userViewModel.getUser()
         if(!user?.isLogged!!){
-            var intent: Intent = Intent(this, LoginActivity::class.java)
+            var intent: Intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
         }
 

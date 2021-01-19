@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".LoginActivity">
+    tools:context=".auth.FragmentRegister">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/taviraj_thin"
             android:textColor="@color/grey"
-            android:text="Welcome Back,"
+            android:text="Welcome,"
             android:textSize="45sp" />
 
         <TextView
@@ -35,42 +35,14 @@
             android:layout_marginTop="0dp"
             android:textColor="@color/grey"
             android:fontFamily="@font/taviraj_thin"
-            android:text="Login to Continue"
+            android:text="Register to Continue"
             android:textSize="20sp" />
 
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="LOGIN"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <EditText
-            android:id="@+id/username_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:text="" />
-
-        <EditText
-            android:id="@+id/password_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPersonName"
-            android:text="" />
--->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
+            android:layout_marginTop="50dp"
             android:textColorHint="@color/grey"
             app:hintTextColor="@color/grey"
             app:boxStrokeColor="@color/grey"
@@ -110,42 +82,16 @@
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
-        <!--<Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:onClick="onLogin"
-            android:paddingHorizontal="50sp"
-            android:paddingVertical="15sp"
-            android:text="Login" />-->
-<!--        <Button-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Forget Password?"-->
-<!--            android:layout_gravity="right"-->
-<!--            android:elevation="10dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginRight="0dp"-->
-<!--            />-->
 
         <Button
-            android:id="@+id/Loginbutton"
+            android:id="@+id/button_register"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="Sign Up"
             android:textColor="@color/white"
             android:layout_gravity="center"
-            android:onClick="onLogin"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="5dp"/>
-
-<!--        <Button-->
-<!--            android:id="@+id/newUser"-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="New User? Sign Up"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:elevation="10dp" />-->
 
         <TextView
             android:id="@+id/warning"
@@ -157,4 +103,4 @@
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
