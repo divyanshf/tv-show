@@ -14,15 +14,31 @@
         android:paddingVertical="10dp"
         android:background="@color/light_grey">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/fjord_one"
-            android:padding="6dp"
-            android:text="   My Movies"
-            android:textColor="@color/grey"
-            android:textSize="25dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fjord_one"
+                android:paddingHorizontal="30dp"
+                android:layout_weight="1"
+                android:text="My Movies"
+                android:textColor="@color/grey"
+                android:textSize="25dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:onClick="logout"
+                android:src="@drawable/ic_logout"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -40,7 +56,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="120dp"
         app:layout_anchor="@+id/viewPager"
         app:layout_anchorGravity="center" />
 
