@@ -7,6 +7,12 @@
 
     <style name="CustomTabStyle" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">5dp</item>
+    </style>
 
+    <style name="AlertDialogCustom" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/grey</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
     </style>
 </resources>

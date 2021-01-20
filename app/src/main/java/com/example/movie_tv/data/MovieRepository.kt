@@ -1,13 +1,11 @@
 package com.example.movie_tv.data
 
 import android.app.Application
-import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.movie_tv.data.dao.MovieDao
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.remote.MovieFirestore
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch

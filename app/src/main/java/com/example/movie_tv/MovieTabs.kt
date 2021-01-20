@@ -1,8 +1,17 @@
 package com.example.movie_tv
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.core.app.ActivityCompat.recreate
 import androidx.viewpager.widget.ViewPager
 import com.example.movie_tv.auth.AuthActivity
 import com.example.movie_tv.fragments.adapters.viewPagerAdapter
@@ -10,6 +19,7 @@ import com.example.movie_tv.fragments.FragmentWish
 import com.example.movie_tv.fragments.FragmentWatching
 import com.example.movie_tv.fragments.FragmentsWatched
 import com.example.movie_tv.fragments.FragmentsAdd
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -24,13 +34,25 @@ class MovieTabs : AppCompatActivity(){
         mAuth = FirebaseAuth.getInstance()
 
 //          Check if the user is logged
-        var user = mAuth.currentUser
+        val user = mAuth.currentUser
         if(user == null){
-            var intent: Intent = Intent(this, AuthActivity::class.java)
+            val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
         }
 
         setUpTabs()
+    }
+
+    fun logout(view: View){
+        MaterialAlertDialogBuilder(this, R.style.AlertDialogCustom)
+            .setTitle("Logout")
+            .setMessage("Are you sure ?")
+            .setPositiveButton("YES", DialogInterface.OnClickListener { dialog, which ->
+                mAuth.signOut()
+                this.recreate()
+            })
+            .setNegativeButton("NO", null)
+            .show()
     }
 
     private fun setUpTabs()
