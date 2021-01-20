@@ -22,10 +22,6 @@ class FragmentWish : Fragment(), MovieAdapter.OnItemClickListener {
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var movies: List<Movie>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +38,6 @@ class FragmentWish : Fragment(), MovieAdapter.OnItemClickListener {
 
         movieViewModel.getWishMovies().observe(viewLifecycleOwner, Observer {
             movies = it
-            Log.i("MOVIES", movies.toString())
             movieAdapter.setMovies(movies)
         })
 
@@ -64,6 +59,9 @@ class FragmentWish : Fragment(), MovieAdapter.OnItemClickListener {
         var movie: Movie = movies[position]
         movie.wishList = !movie.wishList
         movieViewModel.update(movie)
+        if(!movie.wishList and !movie.watched and !movie.watching){
+            movieViewModel.delete(movie)
+        }
     }
 
     private fun addToWatching(position: Int){
@@ -71,6 +69,9 @@ class FragmentWish : Fragment(), MovieAdapter.OnItemClickListener {
         movie.watching = true
         movie.watched = false
         movieViewModel.update(movie)
+        if(!movie.wishList and !movie.watched and !movie.watching){
+            movieViewModel.delete(movie)
+        }
     }
 
     private fun addToWatched(position: Int){
@@ -78,5 +79,8 @@ class FragmentWish : Fragment(), MovieAdapter.OnItemClickListener {
         movie.watching = false
         movie.watched = true
         movieViewModel.update(movie)
+        if(!movie.wishList and !movie.watched and !movie.watching){
+            movieViewModel.delete(movie)
+        }
     }
 }

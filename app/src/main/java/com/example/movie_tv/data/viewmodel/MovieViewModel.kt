@@ -29,6 +29,10 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         mMovieRepository.deleteAll()
     }
 
+    fun syncMovies(){
+        mMovieRepository.syncMovies()
+    }
+
     fun getAllMovies():LiveData<List<Movie>> {
         return mAllMovies
     }

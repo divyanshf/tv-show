@@ -9,16 +9,13 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.movie_tv.data.model.User
-import com.example.movie_tv.data.viewmodel.UserViewModel
 
-class splash : AppCompatActivity() {
-    val splash_time = 3000
+class Splash : AppCompatActivity() {
+    private val splashTime = 3000
     lateinit var topanim : Animation
     lateinit var bottomanim : Animation
     lateinit var imageView: ImageView
     lateinit var text: TextView
-    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +31,10 @@ class splash : AppCompatActivity() {
         imageView.animation = topanim
         text.animation = bottomanim
 
-        val intent = Intent(this@splash,MovieTabs::class.java)
+        val intent = Intent(this@Splash,MovieTabs::class.java)
         Handler().postDelayed( {
             startActivity(intent)
             finish()
-        },splash_time.toLong())
+        },splashTime.toLong())
     }
 }

@@ -11,9 +11,12 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.movie_tv.R
 import com.example.movie_tv.data.model.Movie
+import com.example.movie_tv.data.remote.MovieFirestore
 import com.example.movie_tv.data.viewmodel.MovieViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FragmentsAdd : Fragment() {
     private lateinit var movieViewModel: MovieViewModel
@@ -22,24 +25,30 @@ class FragmentsAdd : Fragment() {
     private lateinit var yearView : TextInputEditText
     private lateinit var ratingBar : RatingBar
     private lateinit var addButton : FloatingActionButton
-    private var ratval: Int =0
+    private var ratval: Long =0
 
     fun add(view: View)
     {
         try {
             val movieName =  mnameView.text.toString()
             val urlName = urlView.text.toString()
-            val yearval = yearView.text.toString().toInt()
+            val yearval = yearView.text.toString().toLong()
+
             if(inputCheck(movieName, urlName, yearval))
             {
                 //Create user object
-                val movie = Movie(movieName , yearval.toInt(), urlName, ratval,
+                val movie = Movie(movieName , yearval, urlName, ratval,
                     wishList = true,
                     watching = false,
                     watched = false
                 )
-                //Add data to database
-                movieViewModel.insert(movie)
+//                Add data to database
+                try {
+                    movieViewModel.insert(movie)
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+
                 mnameView.setText("")
                 urlView.setText("")
                 yearView.setText("")
@@ -51,8 +60,7 @@ class FragmentsAdd : Fragment() {
         }
     }
 
-    private fun inputCheck(moviename:String , url : String, year: Int):Boolean{
-//        return !(TextUtils.isEmpty(moviename) && TextUtils.isEmpty(url) && year > 2020)
+    private fun inputCheck(moviename:String , url : String, year: Long):Boolean{
         if(TextUtils.isEmpty(moviename)){
             return false
         }
@@ -63,10 +71,6 @@ class FragmentsAdd : Fragment() {
             return false
         }
         return true
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -102,7 +106,7 @@ class FragmentsAdd : Fragment() {
                 if(txt.isNotEmpty()){
                     Toast.makeText(context, txt, Toast.LENGTH_SHORT).show()
                 }
-                ratval=rating.toInt()
+                ratval=rating.toLong()
             }
 
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)

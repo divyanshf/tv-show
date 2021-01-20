@@ -7,7 +7,7 @@ import com.example.movie_tv.data.model.Movie
 @Dao
 interface MovieDao {
     @Insert
-    suspend fun insert(movie: Movie)
+    suspend fun insert(movie: Movie) : Long
 
     @Update
     suspend fun update(movie: Movie)

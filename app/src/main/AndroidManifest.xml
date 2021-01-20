@@ -11,12 +11,11 @@
         android:roundIcon="@drawable/tv"
         android:supportsRtl="true"
         android:theme="@style/Theme.MOVIETV">
-        <activity android:name=".MovieTabs"></activity>
+        <activity android:name=".MovieTabs" />
         <activity android:name=".auth.AuthActivity" />
-        <activity android:name=".splash">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

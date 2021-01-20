@@ -57,7 +57,7 @@ class MovieAdapter(val context: Context, val listener: OnItemClickListener) : Re
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         var currentMovie: Movie = mMovies[position]
-        var tmpRating:Int = currentMovie.movieRating
+        var tmpRating:Long = currentMovie.movieRating
 
         //  Handling the UI
         holder.titleView.text = currentMovie.movieName
