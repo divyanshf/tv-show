@@ -61,6 +61,9 @@ class FragmentWatching : Fragment(), MovieAdapter.OnItemClickListener  {
         var movie: Movie = movies[position]
         movie.wishList = !movie.wishList
         movieViewModel.update(movie)
+        if(!movie.wishList and !movie.watched and !movie.watching){
+            movieViewModel.delete(movie)
+        }
     }
 
     private fun addToWatched(position: Int){
@@ -68,5 +71,8 @@ class FragmentWatching : Fragment(), MovieAdapter.OnItemClickListener  {
         movie.watching = false
         movie.watched = true
         movieViewModel.update(movie)
+        if(!movie.wishList and !movie.watched and !movie.watching){
+            movieViewModel.delete(movie)
+        }
     }
 }

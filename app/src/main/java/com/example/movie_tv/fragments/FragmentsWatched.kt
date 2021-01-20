@@ -14,16 +14,11 @@ import com.example.movie_tv.data.adapter.MovieAdapter
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.viewmodel.MovieViewModel
 
-
 class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var movies: List<Movie>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +56,9 @@ class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
         var movie: Movie = movies[position]
         movie.wishList = !movie.wishList
         movieViewModel.update(movie)
+        if(!movie.wishList and !movie.watched and !movie.watching){
+            movieViewModel.delete(movie)
+        }
     }
 
     private fun addToWatching(position: Int){
@@ -68,5 +66,8 @@ class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
         movie.watching = true
         movie.watched = false
         movieViewModel.update(movie)
+        if(!movie.wishList and !movie.watched and !movie.watching){
+            movieViewModel.delete(movie)
+        }
     }
 }
