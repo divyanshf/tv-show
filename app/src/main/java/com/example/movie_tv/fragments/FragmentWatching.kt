@@ -51,10 +51,16 @@ class FragmentWatching : Fragment(), MovieAdapter.OnItemClickListener  {
         when(view?.tag){
             "wish" -> addToWishlist(position)
             "watched" -> addToWatched(position)
+            "delete" -> deleteMovie(position)
             else -> {
                 Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun deleteMovie(position: Int){
+        var movie:Movie = movies[position]
+        movieViewModel.delete(movie)
     }
 
     private fun addToWishlist(position: Int){

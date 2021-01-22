@@ -2,75 +2,87 @@ package com.example.movie_tv.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_tv.R
+import com.example.movie_tv.data.ApiTMDB
+import com.example.movie_tv.data.adapter.MovieAdapter
+import com.example.movie_tv.data.model.ApiResult
 import com.example.movie_tv.data.model.Movie
+import com.example.movie_tv.data.model.MovieJson
 import com.example.movie_tv.data.remote.MovieFirestore
 import com.example.movie_tv.data.viewmodel.MovieViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import retrofit2.*
+import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
-class FragmentsAdd : Fragment() {
+class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
     private lateinit var movieViewModel: MovieViewModel
-    private lateinit var mnameView : TextInputEditText
-    private lateinit var urlView : TextInputEditText
-    private lateinit var yearView : TextInputEditText
-    private lateinit var ratingBar : RatingBar
-    private lateinit var addButton : FloatingActionButton
-    private var ratval: Long =0
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var movieAdapter: MovieAdapter
+    private var movies: ArrayList<Movie> = ArrayList()
 
-    fun add(view: View)
-    {
-        try {
-            val movieName =  mnameView.text.toString()
-            val urlName = urlView.text.toString()
-            val yearval = yearView.text.toString().toLong()
+    private lateinit var retrofit:Retrofit
+    private lateinit var api:ApiTMDB
+    private lateinit var call:Call<ApiResult>
+    private var moviesJson:List<MovieJson>? = ArrayList()
 
-            if(inputCheck(movieName, urlName, yearval))
-            {
-                //Create user object
-                val movie = Movie(movieName , yearval, urlName, ratval,
-                    wishList = true,
-                    watching = false,
-                    watched = false
-                )
-//                Add data to database
-                try {
-                    movieViewModel.insert(movie)
-                }catch (e:Exception){
-                    e.printStackTrace()
+
+    private fun setupCallToApi(){
+        call.enqueue(object : Callback<ApiResult> {
+            override fun onResponse(
+                call: Call<ApiResult>,
+                response: Response<ApiResult>
+            ) {
+                if (!response.isSuccessful) {
+                    Toast.makeText(context, "${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.i("API", response.code().toString())
+                    return
+                }
+                var apiResponse = response.body()
+                moviesJson = apiResponse?.results
+
+
+                for (movie in moviesJson!!) {
+                    val year: Long = movie.release_date.substring(0, 4).toLong()
+                    val image = "https://image.tmdb.org/t/p/w500" + movie.poster_path
+                    val rating: Long = ((movie.vote_average).toFloat() / 2).roundToLong()
+                    val movieModel = Movie(
+                        movie.id.toLong(),
+                        movie.title,
+                        year,
+                        image,
+                        rating,
+                        false,
+                        false,
+                        false
+                    )
+                    movies.add(movieModel)
                 }
 
-                mnameView.setText("")
-                urlView.setText("")
-                yearView.setText("")
-                ratingBar.rating = 0F
-                Toast.makeText(context, "Successfully Added!", Toast.LENGTH_LONG).show()
+                movieAdapter.setMovies(movies)
             }
-        }catch (e:Exception){
-            Toast.makeText(context, "Invalid value!", Toast.LENGTH_LONG).show()
-        }
-    }
 
-    private fun inputCheck(moviename:String , url : String, year: Long):Boolean{
-        if(TextUtils.isEmpty(moviename)){
-            return false
-        }
-        else if(TextUtils.isEmpty(url)){
-            return false
-        }
-        else if(year > 2020){
-            return false
-        }
-        return true
+            override fun onFailure(call: Call<ApiResult>, t: Throwable) {
+                Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
+                Log.i("API", t.message.toString())
+            }
+
+        })
     }
 
     override fun onCreateView(
@@ -80,37 +92,29 @@ class FragmentsAdd : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add, container, false)
 
-        mnameView = view.findViewById(R.id.mname_edt)
-        urlView = view.findViewById(R.id.url_edt)
-        yearView = view.findViewById(R.id.year_edt)
-        ratingBar = view.findViewById(R.id.ratingBar)
-        addButton = view.findViewById(R.id.floatingActionButton2)
 
-        addButton.setOnClickListener {
-            add(it)
-        }
+        recyclerView = view.findViewById(R.id.recycler_view_add)
+        movieAdapter = MovieAdapter(requireContext(), this)
+        movieViewModel = MovieViewModel(activity?.application!!)
 
-        var txt : String
-        ratingBar.onRatingBarChangeListener =
-            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+        recyclerView.adapter = movieAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
-                txt = when(rating.toInt()){
-                    1 -> "Worst Movie"
-                    2 -> "Poor Movie"
-                    3 -> "OK Movie"
-                    4 -> "Good Movie"
-                    5 -> "Excellent Movie"
-                    else -> ""
-                }
+        retrofit = Retrofit.Builder()
+            .baseUrl("https://api.themoviedb.org/3/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-                if(txt.isNotEmpty()){
-                    Toast.makeText(context, txt, Toast.LENGTH_SHORT).show()
-                }
-                ratval=rating.toLong()
-            }
+        api = retrofit.create(ApiTMDB::class.java)
 
-        movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        call = api.getResultFromApi()
+
+        setupCallToApi()
 
         return view
+    }
+
+    override fun onItemClick(position: Int, view: View?) {
+        Log.i("CLICK", position.toString())
     }
 }
