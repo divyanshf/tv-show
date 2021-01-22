@@ -11,7 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
+        android:padding="10dp"
         android:background="@color/light_grey">
 
         <LinearLayout
@@ -46,8 +46,8 @@
             android:background="@color/light_grey"
             app:tabIconTint="@color/grey"
             app:tabIndicatorColor="@color/green"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="5dp"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorHeight="4dp"
             app:tabSelectedTextColor="@color/green"
             app:tabTextColor="@color/grey" />
     </com.google.android.material.appbar.AppBarLayout>

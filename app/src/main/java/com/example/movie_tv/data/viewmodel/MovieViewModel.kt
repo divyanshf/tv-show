@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.example.movie_tv.data.MovieRepository
 import com.example.movie_tv.data.model.Movie
+import com.example.movie_tv.data.model.MovieJson
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
     private var mMovieRepository: MovieRepository = MovieRepository(application)

@@ -36,10 +36,10 @@ class MovieAdapter(val context: Context, val listener: OnItemClickListener) : Re
     }
 
     private suspend fun loadImage(url:String, imageView: ImageView){
-        var drawable:Drawable? = context.getDrawable(R.drawable.ic_launcher_background)
+        var drawable:Drawable? = context.getDrawable(R.drawable.movieslist)
 
         try {
-            var inputStream:InputStream = URL(url).content as InputStream
+            val inputStream:InputStream = URL(url).content as InputStream
             drawable = Drawable.createFromStream(inputStream, "src")
         }catch (e:Exception){
             e.printStackTrace()
@@ -54,10 +54,9 @@ class MovieAdapter(val context: Context, val listener: OnItemClickListener) : Re
         }
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        var currentMovie: Movie = mMovies[position]
-        var tmpRating:Long = currentMovie.movieRating
+        val currentMovie: Movie = mMovies[position]
+        val tmpRating:Long = currentMovie.movieRating
 
         //  Handling the UI
         holder.titleView.text = currentMovie.movieName
@@ -103,11 +102,13 @@ class MovieAdapter(val context: Context, val listener: OnItemClickListener) : Re
         var watchingButton: Button = itemView.findViewById(R.id.watching_button)
         var watchedButton: Button = itemView.findViewById(R.id.watched_button)
         var rateindicator : RatingBar = itemView.findViewById(R.id.indicatorbar)
+        var deleteButton : ImageView = itemView.findViewById(R.id.delete_icon)
 
         init {
             planButton.setOnClickListener(this)
             watchingButton.setOnClickListener(this)
             watchedButton.setOnClickListener(this)
+            deleteButton.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {

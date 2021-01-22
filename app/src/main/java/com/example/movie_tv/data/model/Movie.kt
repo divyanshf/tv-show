@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull
 data class Movie(
     @PrimaryKey(autoGenerate = true) @NotNull @ColumnInfo(name = "id") val movieId: Long,
     @NotNull @ColumnInfo(name = "movie_name") val movieName:String,
-    @NotNull @ColumnInfo(name = "movie_year") val movieYear: Long,
+    @NotNull @ColumnInfo(name = "movie_year") val movieYear:Long,
     @NotNull @ColumnInfo(name = "url") val movieURL:String,
     @NotNull @ColumnInfo(name = "rating") val movieRating:Long,
     @NotNull @ColumnInfo(name = "wish_list") var wishList:Boolean,
