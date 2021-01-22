@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/outer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="15dp"
         android:orientation="vertical">
@@ -20,7 +20,8 @@
             android:id="@+id/inner_layout_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="start">
 
             <ImageView
                 android:id="@+id/image_view"
@@ -32,7 +33,7 @@
             <LinearLayout
                 android:id="@+id/inner_layout_2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:gravity="start"
                 android:orientation="vertical">
@@ -71,7 +72,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <RatingBar
-                    android:id="@+id/indicatorbar"
+                    android:id="@+id/indicator_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"

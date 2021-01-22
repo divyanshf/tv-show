@@ -1,10 +1,7 @@
 package com.example.movie_tv.data.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.renderscript.ScriptGroup
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -101,7 +98,7 @@ class MovieAdapter(val context: Context, val listener: OnItemClickListener) : Re
         var planButton: Button = itemView.findViewById(R.id.plan_button)
         var watchingButton: Button = itemView.findViewById(R.id.watching_button)
         var watchedButton: Button = itemView.findViewById(R.id.watched_button)
-        var rateindicator : RatingBar = itemView.findViewById(R.id.indicatorbar)
+        var rateindicator : RatingBar = itemView.findViewById(R.id.indicator_bar)
         var deleteButton : ImageView = itemView.findViewById(R.id.delete_icon)
 
         init {
