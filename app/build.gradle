@@ -20,6 +20,9 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField 'String', 'API_KEY', TMDBAPIKey
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
