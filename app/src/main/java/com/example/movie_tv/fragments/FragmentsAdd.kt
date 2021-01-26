@@ -1,5 +1,6 @@
 package com.example.movie_tv.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movie_tv.BuildConfig
 import com.example.movie_tv.R
 import com.example.movie_tv.data.ApiTMDB
 import com.example.movie_tv.data.adapter.MovieAdapter
@@ -110,7 +112,7 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
 
         api = retrofit.create(ApiTMDB::class.java)
 
-        call = api.getResultFromApi()
+        call = api.getResultFromApi(BuildConfig.API_KEY)
 
         setupCallToApi()
 
