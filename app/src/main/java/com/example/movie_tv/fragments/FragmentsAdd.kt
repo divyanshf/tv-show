@@ -43,6 +43,7 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
 
 
     private fun setupCallToApi(){
+        movies.clear()
         call.enqueue(object : Callback<ApiResult> {
             override fun onResponse(
                 call: Call<ApiResult>,
@@ -58,20 +59,22 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
 
 
                 for (movie in moviesJson!!) {
-                    val year: Long = movie.release_date.substring(0, 4).toLong()
-                    val image = "https://image.tmdb.org/t/p/w500" + movie.poster_path
-                    val rating: Long = ((movie.vote_average).toFloat() / 2).roundToLong()
-                    val movieModel = Movie(
-                        movie.id.toLong(),
-                        movie.title,
-                        year,
-                        image,
-                        rating,
-                        false,
-                        false,
-                        false
-                    )
-                    movies.add(movieModel)
+                    if(!movieViewModel.findMovies(movie.id.toLong())){
+                        val year: Long = movie.release_date.substring(0, 4).toLong()
+                        val image = "https://image.tmdb.org/t/p/w500" + movie.poster_path
+                        val rating: Long = ((movie.vote_average).toFloat() / 2).roundToLong()
+                        val movieModel = Movie(
+                            movie.id.toLong(),
+                            movie.title,
+                            year,
+                            image,
+                            rating,
+                            false,
+                            false,
+                            false
+                        )
+                        movies.add(movieModel)
+                    }
                 }
 
                 movieAdapter.setMovies(movies)
@@ -94,7 +97,7 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
 
 
         recyclerView = view.findViewById(R.id.recycler_view_add)
-        movieAdapter = MovieAdapter(requireContext(), this)
+        movieAdapter = MovieAdapter(requireContext(), false, this)
         movieViewModel = MovieViewModel(activity?.application!!)
 
         recyclerView.adapter = movieAdapter
@@ -115,6 +118,12 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int, view: View?) {
-        Log.i("CLICK", position.toString())
+        if(view?.tag == "wish"){
+            var movie: Movie = movies[position]
+            movie.wishList = true
+            movieViewModel.insert(movie)
+            movies.removeAt(position)
+            movieAdapter.setMovies(movies)
+        }
     }
 }

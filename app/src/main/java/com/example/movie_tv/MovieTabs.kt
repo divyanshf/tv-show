@@ -1,17 +1,10 @@
 package com.example.movie_tv
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.app.ActivityCompat.recreate
 import androidx.viewpager.widget.ViewPager
 import com.example.movie_tv.auth.AuthActivity
 import com.example.movie_tv.fragments.adapters.viewPagerAdapter
@@ -47,7 +40,7 @@ class MovieTabs : AppCompatActivity(){
         MaterialAlertDialogBuilder(this, R.style.AlertDialogCustom)
             .setTitle("Logout")
             .setMessage("Are you sure ?")
-            .setPositiveButton("YES", DialogInterface.OnClickListener { dialog, which ->
+            .setPositiveButton("YES", DialogInterface.OnClickListener { _, _ ->
                 mAuth.signOut()
                 this.recreate()
             })
