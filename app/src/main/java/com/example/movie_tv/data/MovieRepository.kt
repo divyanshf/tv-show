@@ -9,6 +9,7 @@ import com.example.movie_tv.data.remote.MovieFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MovieRepository (application: Application) {
     private var db: RelationalDatabase = RelationalDatabase.getDatabase(application)
@@ -31,6 +32,16 @@ class MovieRepository (application: Application) {
         movieMap["watched"] = movie.watched
 
         return movieMap
+    }
+
+    fun findMovie(movieId: Long) : Boolean{
+        var found:List<Movie>
+        runBlocking {
+            found = mMovieDao.findMovie(movieId)
+        }
+        if (found.size == 1)
+            return true
+        return false
     }
 
     fun getAllMovies() : LiveData<List<Movie>>{

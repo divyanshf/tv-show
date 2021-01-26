@@ -22,6 +22,10 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         mMovieRepository.update(movie)
     }
 
+    fun findMovies(movieId: Long) : Boolean{
+        return mMovieRepository.findMovie(movieId)
+    }
+
     fun delete(movie: Movie){
         mMovieRepository.delete(movie)
     }

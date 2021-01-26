@@ -19,7 +19,7 @@ import java.io.InputStream
 import java.lang.Exception
 import java.net.URL
 
-class MovieAdapter(val context: Context, val listener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(val context: Context, val show: Boolean, val listener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val mInflater : LayoutInflater = LayoutInflater.from(context)
     private var mMovies : List<Movie> = ArrayList()
 
@@ -64,24 +64,32 @@ class MovieAdapter(val context: Context, val listener: OnItemClickListener) : Re
             loadImage(currentMovie.movieURL, holder.imageView)
         }
 
-        holder.planButton.text = if(currentMovie.wishList){
-            "Drop"
-        }else{
-            "Wish"
-        }
+        if(show){
+            holder.planButton.text = if(currentMovie.wishList){
+                "Drop"
+            }else{
+                "Wish"
+            }
 
-        holder.watchingButton.isEnabled = if(currentMovie.watching){
-            holder.watchedButton.isEnabled = true
-            false
-        }else{
-            true
-        }
+            holder.watchingButton.isEnabled = if(currentMovie.watching){
+                holder.watchedButton.isEnabled = true
+                false
+            }else{
+                true
+            }
 
-        holder.watchedButton.isEnabled = if(currentMovie.watched){
-            holder.watchingButton.isEnabled = true
-            false
-        }else{
-            true
+            holder.watchedButton.isEnabled = if(currentMovie.watched){
+                holder.watchingButton.isEnabled = true
+                false
+            }else{
+                true
+            }
+        }
+        else{
+            holder.planButton.text = "WISH"
+            holder.deleteButton.visibility = View.INVISIBLE
+            holder.watchedButton.visibility = View.INVISIBLE
+            holder.watchingButton.visibility = View.INVISIBLE
         }
     }
 

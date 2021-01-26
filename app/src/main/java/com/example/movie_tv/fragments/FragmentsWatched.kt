@@ -28,7 +28,7 @@ class FragmentsWatched : Fragment(), MovieAdapter.OnItemClickListener {
         val view = inflater.inflate(R.layout.fragment_watched, container, false)
 
         recyclerView = view.findViewById(R.id.recycler_view_watched)
-        movieAdapter = MovieAdapter(requireContext(), this)
+        movieAdapter = MovieAdapter(requireContext(), true, this)
         movieViewModel = MovieViewModel(activity?.application!!)
 
         recyclerView.adapter = movieAdapter
