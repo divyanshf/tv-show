@@ -3,9 +3,11 @@ package com.example.movie_tv.data.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.example.movie_tv.data.MovieRepository
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.model.MovieJson
+import kotlinx.coroutines.launch
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
     private var mMovieRepository: MovieRepository = MovieRepository(application)
@@ -15,11 +17,15 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     private var mWatchingMovies:LiveData<List<Movie>> = mMovieRepository.getWatchingMovies()
 
     fun insert(movie: Movie){
-        mMovieRepository.insert(movie)
+        viewModelScope.launch {
+            mMovieRepository.insert(movie)
+        }
     }
 
     fun update(movie: Movie){
-        mMovieRepository.update(movie)
+        viewModelScope.launch {
+            mMovieRepository.update(movie)
+        }
     }
 
     fun findMovies(movieId: Long) : Boolean{
@@ -27,15 +33,21 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun delete(movie: Movie){
-        mMovieRepository.delete(movie)
+        viewModelScope.launch {
+            mMovieRepository.delete(movie)
+        }
     }
 
     fun deleteAll(){
-        mMovieRepository.deleteAll()
+        viewModelScope.launch {
+            mMovieRepository.deleteAll()
+        }
     }
 
     fun syncMovies(){
-        mMovieRepository.syncMovies()
+        viewModelScope.launch {
+            mMovieRepository.syncMovies()
+        }
     }
 
     fun getAllMovies():LiveData<List<Movie>> {

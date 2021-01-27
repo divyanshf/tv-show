@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiTMDB {
-    @GET("discover/movie?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1")
-    fun getResultFromApi(@Query("api_key") api_key:String) : Call<ApiResult>
+    @GET("search/movie?language=en-US&page=1&include_adult=false")
+    fun getResultFromApi(@Query("api_key") api_key:String, @Query("query") query:String) : Call<ApiResult>
 }
