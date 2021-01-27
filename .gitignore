@@ -10,7 +10,6 @@
 .DS_Store
 /build
 /captures
-/app/src/main/java/com/example/movie_tv/data/ApiTMDB.kt
 .externalNativeBuild
 .cxx
 gradle.properties

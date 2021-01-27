@@ -1,7 +1,7 @@
 package com.example.movie_tv.data.remote
 
 import android.util.Log
-import com.example.movie_tv.data.dao.MovieDao
+import com.example.movie_tv.data.local.dao.MovieDao
 import com.example.movie_tv.data.model.Movie
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

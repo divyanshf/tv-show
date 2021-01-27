@@ -1,4 +1,4 @@
-package com.example.movie_tv.data.dao
+package com.example.movie_tv.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
