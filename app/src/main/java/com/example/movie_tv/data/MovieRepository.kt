@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class MovieRepository (application: Application) {
     private var db: RelationalDatabase = RelationalDatabase.getDatabase(application)
@@ -34,14 +35,11 @@ class MovieRepository (application: Application) {
         return movieMap
     }
 
-    fun findMovie(movieId: Long) : Boolean{
-        var found:List<Movie>
-        runBlocking {
-            found = mMovieDao.findMovie(movieId)
-        }
-        if (found.size == 1)
-            return true
-        return false
+     suspend fun findMovie(movieId: Long) : Boolean{
+         val found:List<Movie> = mMovieDao.findMovie(movieId)
+         if (found.size == 1)
+             return true
+         return false
     }
 
     fun getAllMovies() : LiveData<List<Movie>>{
@@ -60,36 +58,35 @@ class MovieRepository (application: Application) {
         return mWatchingMovies
     }
 
-    fun insert(movie: Movie){
-        CoroutineScope(IO).launch {
-            var newId = mMovieDao.insert(movie)
-            Log.i("NEWID", newId.toString())
+    suspend fun insert(movie: Movie){
+        withContext(IO){
+            val newId = mMovieDao.insert(movie)
             mMovieFirestore.insert(getMovieMap(movie, newId))
         }
     }
 
-    fun update(movie: Movie){
-        CoroutineScope(IO).launch {
+    suspend fun update(movie: Movie){
+        withContext(IO) {
             mMovieDao.update(movie)
             mMovieFirestore.update(getMovieMap(movie, movie.movieId))
         }
     }
 
-    fun delete(movie: Movie){
-        CoroutineScope(IO).launch {
+    suspend fun delete(movie: Movie){
+        withContext(IO) {
             mMovieDao.delete(movie)
             mMovieFirestore.delete(getMovieMap(movie, movie.movieId))
         }
     }
 
-    fun deleteAll(){
-        CoroutineScope(IO).launch {
+    suspend fun deleteAll(){
+        withContext(IO) {
             mMovieDao.deleteAll()
         }
     }
 
-    fun syncMovies(){
-        CoroutineScope(IO).launch {
+    suspend fun syncMovies(){
+        withContext(IO) {
             mMovieFirestore.syncMovies()
         }
     }
