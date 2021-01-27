@@ -3,7 +3,7 @@ package com.example.movie_tv.data
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.movie_tv.data.dao.MovieDao
+import com.example.movie_tv.data.local.dao.MovieDao
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.remote.MovieFirestore
 import kotlinx.coroutines.CoroutineScope
