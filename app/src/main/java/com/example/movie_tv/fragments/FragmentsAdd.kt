@@ -20,6 +20,7 @@ import com.example.movie_tv.data.viewmodel.MovieViewModel
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.Exception
 import kotlin.math.roundToLong
 
 class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
@@ -61,20 +62,31 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
                 else{
                     for (movie in moviesJson!!) {
                         if (!movieViewModel.findMovies(movie.id.toLong())) {
-                            val year: Long = movie.release_date.substring(0, 4).toLong()
-                            val image = "https://image.tmdb.org/t/p/w500" + movie.poster_path
-                            val rating: Long = ((movie.vote_average).toFloat() / 2).roundToLong()
-                            val movieModel = Movie(
-                                movie.id.toLong(),
-                                movie.title,
-                                year,
-                                image,
-                                rating,
-                                false,
-                                false,
-                                false
-                            )
-                            movies.add(movieModel)
+                            try {
+                                val year: Long = movie.release_date.substring(0, 4).toLong()
+
+                                var image = ""
+                                if(!movie.poster_path.isNullOrEmpty()){
+                                    image = "https://image.tmdb.org/t/p/w500" + movie.poster_path
+                                }
+
+                                val rating: Long = ((movie.vote_average).toFloat() / 2).roundToLong()
+
+                                val movieModel = Movie(
+                                    movie.id.toLong(),
+                                    movie.title,
+                                    year,
+                                    image,
+                                    rating,
+                                    false,
+                                    false,
+                                    false
+                                )
+                                movies.add(movieModel)
+                            }
+                            catch (e:Exception){
+                                e.printStackTrace()
+                            }
                         }
                     }
 

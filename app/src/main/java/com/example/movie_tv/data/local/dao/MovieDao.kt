@@ -7,19 +7,19 @@ import com.example.movie_tv.data.model.Movie
 @Dao
 interface MovieDao {
     @Insert
-    fun insert(movie: Movie) : Long
+    suspend fun insert(movie: Movie) : Long
 
     @Update
-    fun update(movie: Movie)
+    suspend fun update(movie: Movie)
 
     @Delete
-    fun delete(movie: Movie)
+    suspend fun delete(movie: Movie)
 
     @Query("DELETE FROM movie_table")
-    fun deleteAll()
+    suspend fun deleteAll()
 
     @Query("SELECT * FROM movie_table WHERE id = :movieId LIMIT 1")
-    fun findMovie(movieId: Long) : List<Movie>
+    suspend fun findMovie(movieId: Long) : List<Movie>
 
     @Query("SELECT * FROM movie_table ORDER BY movie_name ASC")
     fun getAllMovies() : LiveData<List<Movie>>

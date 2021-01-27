@@ -35,14 +35,11 @@ class MovieRepository (application: Application) {
         return movieMap
     }
 
-    fun findMovie(movieId: Long) : Boolean{
-        var found:List<Movie>
-        runBlocking {
-            found = mMovieDao.findMovie(movieId)
-        }
-        if (found.size == 1)
-            return true
-        return false
+     suspend fun findMovie(movieId: Long) : Boolean{
+         val found:List<Movie> = mMovieDao.findMovie(movieId)
+         if (found.size == 1)
+             return true
+         return false
     }
 
     fun getAllMovies() : LiveData<List<Movie>>{
@@ -64,7 +61,6 @@ class MovieRepository (application: Application) {
     suspend fun insert(movie: Movie){
         withContext(IO){
             val newId = mMovieDao.insert(movie)
-            Log.i("NEWID", newId.toString())
             mMovieFirestore.insert(getMovieMap(movie, newId))
         }
     }

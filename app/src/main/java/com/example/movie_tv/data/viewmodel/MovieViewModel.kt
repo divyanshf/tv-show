@@ -8,6 +8,7 @@ import com.example.movie_tv.data.MovieRepository
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.model.MovieJson
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
     private var mMovieRepository: MovieRepository = MovieRepository(application)
@@ -29,7 +30,13 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun findMovies(movieId: Long) : Boolean{
-        return mMovieRepository.findMovie(movieId)
+        var result: Boolean
+
+        runBlocking {
+            result = mMovieRepository.findMovie(movieId)
+        }
+
+        return result
     }
 
     fun delete(movie: Movie){
