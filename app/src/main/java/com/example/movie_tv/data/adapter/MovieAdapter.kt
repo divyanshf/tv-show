@@ -1,5 +1,6 @@
 package com.example.movie_tv.data.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.movie_tv.R
+import com.example.movie_tv.data.MyAppGlideModule
 import com.example.movie_tv.data.model.Movie
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -31,26 +34,8 @@ class MovieAdapter(val context: Context, val show: Boolean, val listener: OnItem
     override fun getItemCount(): Int {
         return mMovies.size
     }
-
-    private suspend fun loadImage(url:String, imageView: ImageView){
-        var drawable:Drawable? = context.getDrawable(R.drawable.movieslist)
-
-        try {
-            val inputStream:InputStream = URL(url).content as InputStream
-            drawable = Drawable.createFromStream(inputStream, "src")
-        }catch (e:Exception){
-            e.printStackTrace()
-        }
-
-        withContext(Main){
-            try {
-                imageView.setImageDrawable(drawable)
-            }catch (e:Exception){
-                e.printStackTrace()
-            }
-        }
-    }
-
+    
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val currentMovie: Movie = mMovies[position]
         val tmpRating:Long = currentMovie.movieRating
@@ -60,9 +45,10 @@ class MovieAdapter(val context: Context, val show: Boolean, val listener: OnItem
         holder.yearView.text = "Released : ${currentMovie.movieYear}"
         holder.rateindicator.rating= tmpRating.toFloat()
 
-        CoroutineScope(IO).launch {
-            loadImage(currentMovie.movieURL, holder.imageView)
-        }
+        Glide.with(context)
+            .load(currentMovie.movieURL)
+            .placeholder(R.drawable.movieslist)
+            .into(holder.imageView)
 
         if(show){
             holder.planButton.text = if(currentMovie.wishList){
