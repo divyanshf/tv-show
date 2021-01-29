@@ -2,11 +2,14 @@ package com.example.movie_tv
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.movie_tv.auth.AuthActivity
+import com.example.movie_tv.data.viewmodel.MovieViewModel
 import com.example.movie_tv.fragments.adapters.viewPagerAdapter
 import com.example.movie_tv.fragments.FragmentWish
 import com.example.movie_tv.fragments.FragmentWatching
@@ -18,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MovieTabs : AppCompatActivity(){
     private lateinit var mAuth : FirebaseAuth
+    private lateinit var mMovieViewModel : MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,7 @@ class MovieTabs : AppCompatActivity(){
 
 //      Initialize late init
         mAuth = FirebaseAuth.getInstance()
+        mMovieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
 //          Check if the user is logged
         val user = mAuth.currentUser
@@ -37,11 +42,14 @@ class MovieTabs : AppCompatActivity(){
     }
 
     fun logout(view: View){
+        var sharedPreferences = this.getSharedPreferences("com.example.movie_tv.auth", 0)!!
         MaterialAlertDialogBuilder(this, R.style.AlertDialogCustom)
             .setTitle("Logout")
             .setMessage("Are you sure ?")
             .setPositiveButton("YES", DialogInterface.OnClickListener { _, _ ->
                 mAuth.signOut()
+                mMovieViewModel.deleteAll()
+                sharedPreferences.edit().putBoolean("SYNCED", false).apply()
                 this.recreate()
             })
             .setNegativeButton("NO", null)

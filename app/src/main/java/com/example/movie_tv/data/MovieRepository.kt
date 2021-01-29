@@ -3,26 +3,23 @@ package com.example.movie_tv.data
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.movie_tv.data.local.dao.MovieDao
 import com.example.movie_tv.data.model.Movie
-import com.example.movie_tv.data.remote.MovieFirestore
-import kotlinx.coroutines.CoroutineScope
+import com.example.movie_tv.data.source.RemoteMovieDataSource
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class MovieRepository (application: Application) {
-    private var db: RelationalDatabase = RelationalDatabase.getDatabase(application)
-    private var mMovieDao: MovieDao = db.movieDao()
-    private var mAllMovies: LiveData<List<Movie>> = mMovieDao.getAllMovies()
-    private var mWishMovies: LiveData<List<Movie>> = mMovieDao.getWishMovies()
-    private var mWatchingMovies: LiveData<List<Movie>> = mMovieDao.getWatchingMovies()
-    private var mWatchedMovies: LiveData<List<Movie>> = mMovieDao.getWatchedMovies()
-    private var mMovieFirestore: MovieFirestore = MovieFirestore(mMovieDao)
+    private var db = RelationalDatabase.getDatabase(application)
+    private var mMovieDao = db.movieDao()
+    private var mAllMovies = mMovieDao.getAllMovies()
+    private var mWishMovies = mMovieDao.getWishMovies()
+    private var mWatchingMovies = mMovieDao.getWatchingMovies()
+    private var mWatchedMovies = mMovieDao.getWatchedMovies()
+    private var mRemoteMovieDataSource = RemoteMovieDataSource(mMovieDao)
 
     private fun getMovieMap(movie : Movie, id : Long) : HashMap<String, Any>{
-        var movieMap = HashMap<String, Any>()
+        val movieMap = HashMap<String, Any>()
         movieMap["id"] = id
         movieMap["name"] = movie.movieName
         movieMap["year"] = movie.movieYear
@@ -42,40 +39,40 @@ class MovieRepository (application: Application) {
          return false
     }
 
-    fun getAllMovies() : LiveData<List<Movie>>{
+    fun getAllMovies() : Flow<List<Movie>>{
         return mAllMovies
     }
 
-    fun getWishMovies() : LiveData<List<Movie>>{
+    fun getWishMovies() : Flow<List<Movie>>{
         return mWishMovies
     }
 
-    fun getWatchedMovies() : LiveData<List<Movie>>{
+    fun getWatchedMovies() : Flow<List<Movie>>{
         return mWatchedMovies
     }
 
-    fun getWatchingMovies() : LiveData<List<Movie>>{
+    fun getWatchingMovies() : Flow<List<Movie>>{
         return mWatchingMovies
     }
 
     suspend fun insert(movie: Movie){
         withContext(IO){
             val newId = mMovieDao.insert(movie)
-            mMovieFirestore.insert(getMovieMap(movie, newId))
+            mRemoteMovieDataSource.insert(getMovieMap(movie, newId))
         }
     }
 
     suspend fun update(movie: Movie){
         withContext(IO) {
             mMovieDao.update(movie)
-            mMovieFirestore.update(getMovieMap(movie, movie.movieId))
+            mRemoteMovieDataSource.update(getMovieMap(movie, movie.movieId))
         }
     }
 
     suspend fun delete(movie: Movie){
         withContext(IO) {
             mMovieDao.delete(movie)
-            mMovieFirestore.delete(getMovieMap(movie, movie.movieId))
+            mRemoteMovieDataSource.delete(getMovieMap(movie, movie.movieId))
         }
     }
 
@@ -85,9 +82,7 @@ class MovieRepository (application: Application) {
         }
     }
 
-    suspend fun syncMovies(){
-        withContext(IO) {
-            mMovieFirestore.syncMovies()
-        }
+    fun syncMovies(){
+        mRemoteMovieDataSource.syncMovies()
     }
 }

@@ -1,8 +1,9 @@
-package com.example.movie_tv.data.local.dao
+package com.example.movie_tv.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.movie_tv.data.model.Movie
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDao {
@@ -22,14 +23,14 @@ interface MovieDao {
     suspend fun findMovie(movieId: Long) : List<Movie>
 
     @Query("SELECT * FROM movie_table ORDER BY movie_name ASC")
-    fun getAllMovies() : LiveData<List<Movie>>
+    fun getAllMovies() : Flow<List<Movie>>
 
     @Query("SELECT * FROM movie_table WHERE wish_list = 1 ORDER BY movie_name ASC")
-    fun getWishMovies() : LiveData<List<Movie>>
+    fun getWishMovies() : Flow<List<Movie>>
 
     @Query("SELECT * FROM movie_table WHERE watching = 1 ORDER BY movie_name ASC")
-    fun getWatchingMovies() : LiveData<List<Movie>>
+    fun getWatchingMovies() : Flow<List<Movie>>
 
     @Query("SELECT * FROM movie_table WHERE watched = 1 ORDER BY movie_name ASC")
-    fun getWatchedMovies() : LiveData<List<Movie>>
+    fun getWatchedMovies() : Flow<List<Movie>>
 }
