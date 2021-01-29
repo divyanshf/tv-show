@@ -3,6 +3,7 @@ package com.example.movie_tv.data.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movie_tv.data.MovieRepository
 import com.example.movie_tv.data.model.Movie
@@ -12,10 +13,10 @@ import kotlinx.coroutines.runBlocking
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
     private var mMovieRepository: MovieRepository = MovieRepository(application)
-    private var mAllMovies:LiveData<List<Movie>> = mMovieRepository.getAllMovies()
-    private var mWishMovies:LiveData<List<Movie>> = mMovieRepository.getWishMovies()
-    private var mWatchedMovies:LiveData<List<Movie>> = mMovieRepository.getWatchedMovies()
-    private var mWatchingMovies:LiveData<List<Movie>> = mMovieRepository.getWatchingMovies()
+    private var mAllMovies:LiveData<List<Movie>> = mMovieRepository.getAllMovies().asLiveData()
+    private var mWishMovies:LiveData<List<Movie>> = mMovieRepository.getWishMovies().asLiveData()
+    private var mWatchedMovies:LiveData<List<Movie>> = mMovieRepository.getWatchedMovies().asLiveData()
+    private var mWatchingMovies:LiveData<List<Movie>> = mMovieRepository.getWatchingMovies().asLiveData()
 
     fun insert(movie: Movie){
         viewModelScope.launch {

@@ -1,11 +1,13 @@
 package com.example.movie_tv.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,16 +29,24 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieAdapter: MovieAdapter
-    private var movies: ArrayList<Movie> = ArrayList()
-
     private lateinit var searchEditText: TextInputEditText
     private lateinit var searchButton: ImageButton
+    private var movies: ArrayList<Movie> = ArrayList()
 
+    //  Retrofit
     private lateinit var retrofit:Retrofit
     private lateinit var api:ApiTMDB
     private lateinit var call:Call<ApiResult>
     private var moviesJson:List<MovieJson>? = ArrayList()
 
+    private fun hideKeyboard(){
+        try {
+            val imm:InputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
 
     private fun setupCallToApi(query:String){
         movies.clear()
@@ -53,13 +63,14 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
                     Log.i("API", response.code().toString())
                     return
                 }
-                var apiResponse = response.body()
+                val apiResponse = response.body()
                 moviesJson = apiResponse?.results
 
                 if (moviesJson.isNullOrEmpty()) {
                     Toast.makeText(context, "No results found!", Toast.LENGTH_SHORT).show()
                 }
                 else{
+                    hideKeyboard()
                     for (movie in moviesJson!!) {
                         if (!movieViewModel.findMovies(movie.id.toLong())) {
                             try {
@@ -78,9 +89,9 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
                                     year,
                                     image,
                                     rating,
-                                    false,
-                                    false,
-                                    false
+                                    wishList = false,
+                                    watching = false,
+                                    watched = false
                                 )
                                 movies.add(movieModel)
                             }
@@ -96,13 +107,12 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
 
             override fun onFailure(call: Call<ApiResult>, t: Throwable) {
                 Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
-                Log.i("API", t.message.toString())
             }
 
         })
     }
 
-    fun onSearch(){
+    private fun onSearch(){
         val searchString = searchEditText.text
         if(searchString?.isNotEmpty()!!){
             setupCallToApi(searchString.toString())
@@ -144,7 +154,7 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int, view: View?) {
         if(view?.tag == "wish"){
-            var movie: Movie = movies[position]
+            val movie: Movie = movies[position]
             movie.wishList = true
             movieViewModel.insert(movie)
             movies.removeAt(position)

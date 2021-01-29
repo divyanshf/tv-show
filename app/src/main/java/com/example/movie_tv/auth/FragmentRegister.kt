@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.movie_tv.R
 import com.example.movie_tv.data.viewmodel.MovieViewModel
@@ -28,30 +29,44 @@ class FragmentRegister : Fragment() {
     private lateinit var fire:FirebaseFirestore
     private lateinit var sharedPreferences:SharedPreferences
 
+    private fun formatUsername(username:String) : String{
+        return username.filter {
+            !it.isWhitespace()
+        }
+    }
+
     private fun registerUser(){
         var username = usernameEditText.text.toString()
         var password = passwordEditText.text.toString()
 
-        mAuth.createUserWithEmailAndPassword(username, password)
-            .addOnCompleteListener(OnCompleteListener<AuthResult>(){
-                if(it.isSuccessful){
+        username = formatUsername(username)
+        usernameEditText.setText(username)
 
-                    fire.collection("users")
-                        .document(username)
-                        .set({})
-                        .addOnSuccessListener {
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.i("REGISTER", exception.toString())
-                        }
+        if(username.isNotEmpty() and password.isNotEmpty()){
+            mAuth.createUserWithEmailAndPassword(username, password)
+                .addOnCompleteListener(OnCompleteListener<AuthResult>(){
+                    if(it.isSuccessful){
 
-                    //  Finish the activity
-                    activity?.finish()
-                }else{
-                    warningTextView.text = "Please enter valid credentials!"
-                    warningTextView.visibility = View.VISIBLE
-                }
-            })
+                        fire.collection("users")
+                            .document(username)
+                            .set({})
+                            .addOnSuccessListener {
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.i("REGISTER", exception.toString())
+                            }
+
+                        //  Finish the activity
+                        activity?.finish()
+                    }else{
+                        warningTextView.text = "Please enter valid credentials!"
+                        warningTextView.visibility = View.VISIBLE
+                    }
+                })
+        }
+        else{
+            Toast.makeText(context, "Invalid value", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun validate():Boolean{

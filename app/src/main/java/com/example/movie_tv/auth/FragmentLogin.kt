@@ -25,29 +25,43 @@ class FragmentLogin : Fragment() {
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var warningTextView: TextView
     private lateinit var mAuth:FirebaseAuth
-    private lateinit var fire:FirebaseFirestore
     private lateinit var sharedPreferences: SharedPreferences
+
+    private fun formatUsername(username:String) : String{
+        return username.filter {
+            !it.isWhitespace()
+        }
+    }
 
     private fun loginUser(){
         var username:String = usernameEditText.text.toString()
         var password:String = passwordEditText.text.toString()
 
-        mAuth.signInWithEmailAndPassword(username, password)
-            .addOnCompleteListener(OnCompleteListener<AuthResult>() {
-                if (it.isSuccessful) {
-//                    Fetch Movies
-                    if(!sharedPreferences.getBoolean("SYNCED", false)){
-                        movieViewModel.deleteAll()
-                        movieViewModel.syncMovies()
-                        sharedPreferences.edit().putBoolean("SYNCED", true).apply()
-                    }
+        username = formatUsername(username)
+        usernameEditText.setText(username)
 
-                    //  Finish the activity
-                    activity?.finish()
-                } else {
-                    warningTextView.visibility = View.VISIBLE
-                }
-            })
+        if(username.isNotEmpty() and password.isNotEmpty()){
+            mAuth.signInWithEmailAndPassword(username, password)
+                .addOnCompleteListener(OnCompleteListener<AuthResult>() {
+                    if (it.isSuccessful) {
+                        // Fetch Movies
+                        if(!sharedPreferences.getBoolean("SYNCED", false)){
+                            movieViewModel.deleteAll()
+                            movieViewModel.syncMovies()
+                            sharedPreferences.edit().putBoolean("SYNCED", true).apply()
+                        }
+
+                        //  Finish the activity
+                        activity?.finish()
+                    } else {
+                        warningTextView.text = it.exception.toString()
+                        warningTextView.visibility = View.VISIBLE
+                    }
+                })
+        }
+        else{
+            Toast.makeText(context, "Invalid value", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreateView(
@@ -62,7 +76,6 @@ class FragmentLogin : Fragment() {
         passwordEditText = view.findViewById(R.id.password_edit_text)
         warningTextView = view.findViewById(R.id.warning)
         mAuth = FirebaseAuth.getInstance()
-        fire = FirebaseFirestore.getInstance()
         sharedPreferences = context?.getSharedPreferences("com.example.movie_tv.auth", 0)!!
 
         view.findViewById<Button>(R.id.button_login).setOnClickListener {
