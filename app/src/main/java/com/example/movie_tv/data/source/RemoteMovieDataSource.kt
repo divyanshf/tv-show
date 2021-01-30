@@ -9,9 +9,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-class RemoteMovieDataSource(private val mMovieDao: MovieDao) {
-    private val fire = FirebaseFirestore.getInstance()
-    private val mAuth = FirebaseAuth.getInstance()
+class RemoteMovieDataSource
+    constructor(
+        private val mMovieDao: MovieDao,
+        private val fire: FirebaseFirestore,
+        private val mAuth: FirebaseAuth
+        ) {
 
     fun insert(movieMap : HashMap<String, Any>) : Boolean{
         var returnValue = false

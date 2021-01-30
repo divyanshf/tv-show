@@ -1,37 +1,37 @@
 package com.example.movie_tv
 
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.movie_tv.auth.AuthActivity
 import com.example.movie_tv.data.viewmodel.MovieViewModel
-import com.example.movie_tv.fragments.adapters.viewPagerAdapter
-import com.example.movie_tv.fragments.FragmentWish
 import com.example.movie_tv.fragments.FragmentWatching
-import com.example.movie_tv.fragments.FragmentsWatched
+import com.example.movie_tv.fragments.FragmentWish
 import com.example.movie_tv.fragments.FragmentsAdd
+import com.example.movie_tv.fragments.FragmentsWatched
+import com.example.movie_tv.fragments.adapters.viewPagerAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MovieTabs : AppCompatActivity(){
-    private lateinit var mAuth : FirebaseAuth
-    private lateinit var mMovieViewModel : MovieViewModel
+    @Inject lateinit var mAuth : FirebaseAuth
+    private val mMovieViewModel: MovieViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_tabs)
 
-//      Initialize late init
+        //  Initialize late init
         mAuth = FirebaseAuth.getInstance()
-        mMovieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-//          Check if the user is logged
+        //  Check if the user is logged
         val user = mAuth.currentUser
         if(user == null){
             val intent = Intent(this, AuthActivity::class.java)
@@ -41,21 +41,23 @@ class MovieTabs : AppCompatActivity(){
         setUpTabs()
     }
 
+    //  Triggers on the logout button
     fun logout(view: View){
-        var sharedPreferences = this.getSharedPreferences("com.example.movie_tv.auth", 0)!!
+        val sharedPreferences = this.getSharedPreferences("com.example.movie_tv.auth", 0)!!
         MaterialAlertDialogBuilder(this, R.style.AlertDialogCustom)
             .setTitle("Logout")
             .setMessage("Are you sure ?")
-            .setPositiveButton("YES", DialogInterface.OnClickListener { _, _ ->
+            .setPositiveButton("YES") { _, _ ->
                 mAuth.signOut()
                 mMovieViewModel.deleteAll()
                 sharedPreferences.edit().putBoolean("SYNCED", false).apply()
                 this.recreate()
-            })
+            }
             .setNegativeButton("NO", null)
             .show()
     }
 
+    //  Set the tabs up
     private fun setUpTabs()
     {
         val adapter = viewPagerAdapter(supportFragmentManager)
@@ -75,6 +77,7 @@ class MovieTabs : AppCompatActivity(){
         tabLayout.getTabAt(3)!!.setIcon(R.drawable.ic_baseline_check_circle_outline_24)
     }
 
+    //  On activity resume after auth activity
     override fun onResume() {
         super.onResume()
 

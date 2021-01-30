@@ -1,18 +1,23 @@
 package com.example.movie_tv.data.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movie_tv.data.MovieRepository
 import com.example.movie_tv.data.model.Movie
-import com.example.movie_tv.data.model.MovieJson
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class MovieViewModel(application: Application) : AndroidViewModel(application) {
-    private var mMovieRepository: MovieRepository = MovieRepository(application)
+@HiltViewModel
+class MovieViewModel
+@Inject
+constructor(
+    private val mMovieRepository: MovieRepository
+) : ViewModel() {
+
     private var mAllMovies:LiveData<List<Movie>> = mMovieRepository.getAllMovies().asLiveData()
     private var mWishMovies:LiveData<List<Movie>> = mMovieRepository.getWishMovies().asLiveData()
     private var mWatchedMovies:LiveData<List<Movie>> = mMovieRepository.getWatchedMovies().asLiveData()
