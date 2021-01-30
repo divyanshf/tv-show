@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import com.example.movie_tv.R
 
 class FragmentAuth : Fragment(), View.OnClickListener {
-    var navController:NavController? = null
+    private var navController:NavController? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

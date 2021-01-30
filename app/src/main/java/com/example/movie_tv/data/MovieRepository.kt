@@ -1,38 +1,23 @@
 package com.example.movie_tv.data
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.LiveData
+import com.example.movie_tv.data.dao.MovieDao
 import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.source.RemoteMovieDataSource
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-class MovieRepository (application: Application) {
-    private var db = RelationalDatabase.getDatabase(application)
-    private var mMovieDao = db.movieDao()
+class MovieRepository
+constructor(
+    private val mMovieDao:MovieDao,
+    private var mRemoteMovieDataSource: RemoteMovieDataSource
+) {
     private var mAllMovies = mMovieDao.getAllMovies()
     private var mWishMovies = mMovieDao.getWishMovies()
     private var mWatchingMovies = mMovieDao.getWatchingMovies()
     private var mWatchedMovies = mMovieDao.getWatchedMovies()
-    private var mRemoteMovieDataSource = RemoteMovieDataSource(mMovieDao)
 
-    private fun getMovieMap(movie : Movie, id : Long) : HashMap<String, Any>{
-        val movieMap = HashMap<String, Any>()
-        movieMap["id"] = id
-        movieMap["name"] = movie.movieName
-        movieMap["year"] = movie.movieYear
-        movieMap["url"] = movie.movieURL
-        movieMap["rating"] = movie.movieRating
-        movieMap["wishList"] = movie.wishList
-        movieMap["watching"] = movie.watching
-        movieMap["watched"] = movie.watched
-
-        return movieMap
-    }
-
-     suspend fun findMovie(movieId: Long) : Boolean{
+    suspend fun findMovie(movieId: Long) : Boolean{
          val found:List<Movie> = mMovieDao.findMovie(movieId)
          if (found.size == 1)
              return true
@@ -84,5 +69,19 @@ class MovieRepository (application: Application) {
 
     fun syncMovies(){
         mRemoteMovieDataSource.syncMovies()
+    }
+
+    private fun getMovieMap(movie : Movie, id : Long) : HashMap<String, Any>{
+        val movieMap = HashMap<String, Any>()
+        movieMap["id"] = id
+        movieMap["name"] = movie.movieName
+        movieMap["year"] = movie.movieYear
+        movieMap["url"] = movie.movieURL
+        movieMap["rating"] = movie.movieRating
+        movieMap["wishList"] = movie.wishList
+        movieMap["watching"] = movie.watching
+        movieMap["watched"] = movie.watched
+
+        return movieMap
     }
 }

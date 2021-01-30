@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_tv.BuildConfig
@@ -20,13 +21,16 @@ import com.example.movie_tv.data.model.Movie
 import com.example.movie_tv.data.model.MovieJson
 import com.example.movie_tv.data.viewmodel.MovieViewModel
 import com.google.android.material.textfield.TextInputEditText
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 import kotlin.Exception
 import kotlin.math.roundToLong
 
+@AndroidEntryPoint
 class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
-    private lateinit var movieViewModel: MovieViewModel
+    private val movieViewModel: MovieViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var searchEditText: TextInputEditText
@@ -39,13 +43,35 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
     private lateinit var call:Call<ApiResult>
     private var moviesJson:List<MovieJson>? = ArrayList()
 
-    private fun hideKeyboard(){
-        try {
-            val imm:InputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
-        }catch (e:Exception){
-            e.printStackTrace()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_add, container, false)
+
+        //  Initialize the lateinits
+        recyclerView = view.findViewById(R.id.recycler_view_search)
+        movieAdapter = MovieAdapter(requireContext(), false, this)
+
+        recyclerView.adapter = movieAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        searchEditText = view.findViewById(R.id.search_edit_text)
+        searchButton = view.findViewById(R.id.search_movie_button)
+
+        retrofit = Retrofit.Builder()
+            .baseUrl("https://api.themoviedb.org/3/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        api = retrofit.create(ApiTMDB::class.java)
+
+        searchButton.setOnClickListener {
+            onSearch()
         }
+
+        return view
     }
 
     private fun setupCallToApi(query:String){
@@ -121,37 +147,16 @@ class FragmentsAdd : Fragment(), MovieAdapter.OnItemClickListener {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add, container, false)
-
-        recyclerView = view.findViewById(R.id.recycler_view_search)
-        movieAdapter = MovieAdapter(requireContext(), false, this)
-        movieViewModel = MovieViewModel(activity?.application!!)
-
-        recyclerView.adapter = movieAdapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        searchEditText = view.findViewById(R.id.search_edit_text)
-        searchButton = view.findViewById(R.id.search_movie_button)
-
-        retrofit = Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        api = retrofit.create(ApiTMDB::class.java)
-
-        searchButton.setOnClickListener {
-            onSearch()
+    private fun hideKeyboard(){
+        try {
+            val imm:InputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
+        }catch (e:Exception){
+            e.printStackTrace()
         }
-
-        return view
     }
 
+    //  On item click
     override fun onItemClick(position: Int, view: View?) {
         if(view?.tag == "wish"){
             val movie: Movie = movies[position]

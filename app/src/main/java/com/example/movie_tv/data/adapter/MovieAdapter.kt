@@ -2,7 +2,6 @@ package com.example.movie_tv.data.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,21 +12,22 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movie_tv.R
-import com.example.movie_tv.data.MyAppGlideModule
 import com.example.movie_tv.data.model.Movie
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import java.io.InputStream
-import java.lang.Exception
-import java.net.URL
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.scopes.FragmentScoped
+import javax.inject.Inject
 
-class MovieAdapter(val context: Context, val show: Boolean, val listener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter constructor(
+    val context: Context,
+    val show: Boolean,
+    val listener: OnItemClickListener
+    ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+
     private val mInflater : LayoutInflater = LayoutInflater.from(context)
     private var mMovies : List<Movie> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        var itemView:View = mInflater.inflate(R.layout.movie_item, parent, false)
+        val itemView:View = mInflater.inflate(R.layout.movie_item, parent, false)
         return MovieViewHolder(itemView)
     }
 

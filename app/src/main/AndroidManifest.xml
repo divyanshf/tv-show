@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/tv"
         android:label="TV Show Watch Tracker"
