@@ -70,10 +70,10 @@ TMDBAPIKey="tmdb_api_key"
    <td>Watched Screen</td>
   </tr>
   <tr>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449644280381480/Screenshot_2021-01-31-20-05-06-80_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805450943290146816/Screenshot_2021-01-31-20-22-34-33_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805450942900207632/Screenshot_2021-01-31-20-22-37-14_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805450942605951006/Screenshot_2021-01-31-20-22-39-76_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468330391240704/Screenshot_20210131-213229.png" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468330105372683/Screenshot_20210131-213249.png" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468329858302022/Screenshot_20210131-213301.png" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468329585803304/Screenshot_20210131-213311.png" width=200 ></td>
   </tr>
  </table>
 
