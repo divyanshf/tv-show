@@ -42,7 +42,7 @@ TMDBAPIKey="tmdb_api_key"
 
 
 ## APK
- You can download the zip file of apk [here](https://github.com/DivyanshFalodiya/tv-show/files/5899936/MoviesTracker.zip)
+ You can download the zip file of apk [here](https://github.com/DivyanshFalodiya/tv-show/files/5900029/MovieTracker.zip)
  
 ## Screenshots
 
