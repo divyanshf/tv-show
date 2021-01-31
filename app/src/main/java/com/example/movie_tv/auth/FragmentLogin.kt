@@ -55,7 +55,7 @@ class FragmentLogin : Fragment() {
                         //  Finish the activity
                         activity?.finish()
                     } else {
-                        warningTextView.text = it.exception.toString()
+                        warningTextView.text = "Please enter valid value"
                         warningTextView.visibility = View.VISIBLE
                     }
                 }
