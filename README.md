@@ -40,7 +40,8 @@ TMDBAPIKey="tmdb_api_key"
 - Build and run 
 
 
+
 ## APK
- You can download the zip file of apk [here](https://github.com/DivyanshFalodiya/tv-show/files/5899777/MovieTracker.zip)
+ You can download the zip file of apk [here](https://github.com/DivyanshFalodiya/tv-show/files/5899936/MoviesTracker.zip)
 
-
+<img src = "https://cdn.discordapp.com/attachments/789588594288623629/805449643236261949/Screenshot_2021-01-31-20-06-04-00_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width="150px">
