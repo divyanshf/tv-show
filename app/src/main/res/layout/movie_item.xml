@@ -70,15 +70,20 @@
                     android:text="Released : 2020"
                     android:layout_marginTop="4dp"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
+<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RatingBar
+        android:id="@+id/indicator_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
 
-                <RatingBar
-                    android:id="@+id/indicator_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:isIndicator="true"
-                    android:layout_marginStart="-3dp"
-                    android:theme="@style/RatingBar"/>
+        android:isIndicator="true"
+        android:layout_marginStart="-3dp"
+        android:theme="@style/RatingBar"/>
+</HorizontalScrollView>
+
 
             </LinearLayout>
         </LinearLayout>
