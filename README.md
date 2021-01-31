@@ -49,12 +49,31 @@ TMDBAPIKey="tmdb_api_key"
 ### Autentication Screens
 <table>
   <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
+    <td>Auth Screen</td>
+   <td>Register Screen</td>
+     <td>Login Screen</td>
   </tr>
   <tr>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449643696848966/Screenshot_2021-01-31-20-05-52-53_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=270 height=480></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449643236261949/Screenshot_2021-01-31-20-06-04-00_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=270 height=480></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449643696848966/Screenshot_2021-01-31-20-05-52-53_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449643236261949/Screenshot_2021-01-31-20-06-04-00_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+   <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805456897448738837/Screenshot_2021-01-31-20-20-19-06_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+  </tr>
+ </table>
+ 
+ ### Main Screens
+ 
+ <table>
+  <tr>
+    <td>Search Screen</td>
+   <td>Wishlist Screen</td>
+   <td>Watching Screen</td>
+   <td>Watched Screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449644280381480/Screenshot_2021-01-31-20-05-06-80_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805450943290146816/Screenshot_2021-01-31-20-22-34-33_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805450942900207632/Screenshot_2021-01-31-20-22-37-14_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805450942605951006/Screenshot_2021-01-31-20-22-39-76_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
   </tr>
  </table>
 
