@@ -30,10 +30,10 @@ An app to help track which TV Shows/Movies you have watched or plan to watch.
 
 ### Prerequisite
 - Android Studio
-- An api key for fetching data from [TMDB](https://www.themoviedb.org)
+- An api key for fetching data from [TMDB](https://github.com/divyanshf/tv-show/releases)
 
 ### Setup
-- In gradle.properties, put your TMDB api key here 
+- In https://github.com/divyanshf/tv-show/releases, put your TMDB api key here 
 ```
 TMDBAPIKey="tmdb_api_key"
 ```
@@ -42,7 +42,7 @@ TMDBAPIKey="tmdb_api_key"
 
 
 ## APK
- You can download the zip file of apk [here](https://github.com/DivyanshFalodiya/tv-show/files/5900029/MovieTracker.zip)
+ You can download the zip file of apk [here](https://github.com/divyanshf/tv-show/releases)
  
 ## Screenshots
 
@@ -54,9 +54,9 @@ TMDBAPIKey="tmdb_api_key"
      <td>Login Screen</td>
   </tr>
   <tr>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449643696848966/Screenshot_2021-01-31-20-05-52-53_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805449643236261949/Screenshot_2021-01-31-20-06-04-00_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
-   <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805456897448738837/Screenshot_2021-01-31-20-20-19-06_1d4ca938e58b31c3a8725aa53cc75be6.jpg" width=200 ></td>
+    <td><img src="https://github.com/divyanshf/tv-show/releases" width=200 ></td>
+    <td><img src="https://github.com/divyanshf/tv-show/releases" width=200 ></td>
+   <td><img src="https://github.com/divyanshf/tv-show/releases" width=200 ></td>
   </tr>
  </table>
  
@@ -70,10 +70,10 @@ TMDBAPIKey="tmdb_api_key"
    <td>Watched Screen</td>
   </tr>
   <tr>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468330391240704/Screenshot_20210131-213229.png" width=200 ></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468330105372683/Screenshot_20210131-213249.png" width=200 ></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468329858302022/Screenshot_20210131-213301.png" width=200 ></td>
-    <td><img src="https://cdn.discordapp.com/attachments/789588594288623629/805468329585803304/Screenshot_20210131-213311.png" width=200 ></td>
+    <td><img src="https://github.com/divyanshf/tv-show/releases" width=200 ></td>
+    <td><img src="https://github.com/divyanshf/tv-show/releases" width=200 ></td>
+    <td><img src="https://github.com/divyanshf/tv-show/releases" width=200 ></td>
+    <td><img src="https://github.com/divyanshf/tv-show/releases" width=200 ></td>
   </tr>
  </table>
 
